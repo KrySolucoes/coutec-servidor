@@ -1,0 +1,40 @@
+<router-outlet *ngIf="route == 'login'"></router-outlet>
+<div *ngIf="loading" class="loading-container">
+  <div class="spinner-border text-light" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div class="wrapper"
+*ngIf="route == 'admin' && user?.uuid"
+[ngClass]="{'nav_open': navShow}">
+  <!-- Main Header -->
+  <app-main-header (navOpen)="navOpen()"></app-main-header>
+  <!-- End Main Header -->
+
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  <!-- End Sidebar -->
+
+  <div class="main-panel">
+    <div class="container container-full">
+      <router-outlet></router-outlet>
+    </div>
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav class="pull-left">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link">
+
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- <div class="copyright ml-auto">
+          <img width="125" height="30" src="../assets/Sem Título-1.png">
+        </div> -->
+      </div>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+
+<div class="page-navs bg-white">
+  <div class="nav-scroller">
+    <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
+      <a class="nav-link active show"  [style.color]="configurations?.color_01" [style.border-color]="configurations?.color_01" data-toggle="tab" href="#tab1">Cronograma
+        <span class="count ml-1"></span>
+      </a>
+      <div class="ml-auto" style="width: 250px;">
+        <app-form-select
+        [list]="installations"
+        [key]="'uuid'"
+        [text]="'name'"
+        name="installation_uuid"
+        [placeholder]="'Instalação'"
+        [(ngModel)]="installation_uuid"
+        (ngModelChange)="list()"
+        ></app-form-select>
+      </div>
+      <div class="ml-2">
+        <a class="btn btn-success"
+        [style.background]="configurations?.color_01"
+        *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')"
+        routerLink="/admin/service-orders/new">Nova Ordem de Serviço</a>
+        <a class="btn btn-success ml-2"
+        [style.background]="configurations?.color_01"
+        (click)="print()">Imprimir</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-inner">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card p-3">
+        <app-calendar *ngIf="configurations?.color_01" [eventColor]="configurations?.color_01" (callback)="callbackCalendar($event)" #calendar></app-calendar>
+			</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+
+
+<div class="page-navs bg-white">
+  <div class="nav-scroller">
+    <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
+      <a class="nav-link active show"  [style.color]="configurations?.color_01" [style.border-color]="configurations?.color_01" data-toggle="tab" href="#tab1">Tipos de Ativo
+        <span class="count ml-1"></span>
+      </a>
+      <div class="ml-auto">
+        <a class="btn btn-success" [style.background]="configurations?.color_01" routerLink="/admin/asset-types/new">Novo Tipo de Ativo</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-inner">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title">Tipos de Ativo</div>
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Nome</th>
+								<th scope="col">Referencia</th>
+							</tr>
+						</thead>
+						<tbody>
+              <tr *ngFor="let model of models" class="nav-item">
+								<td>
+                  <a (click)="open(model)">
+                    {{model.name}}
+                  </a>
+                </td>
+                <td>
+                  {{model.type}}
+                </td>
+              </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+    </div>
+  </div>
+</div>

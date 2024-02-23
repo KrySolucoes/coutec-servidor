@@ -1,0 +1,207 @@
+
+<div class="page-inner">
+	<h4 class="page-title" (click)="getUltimaCompra()">Produto/Serviço - {{model?.name}}</h4>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card card-with-nav">
+				<div class="card-header">
+          <app-nav-tab [navMenu]="navMenu" (selectMenu)="selectMenu($event)"></app-nav-tab>
+				</div>
+				<div class="card-body">
+          <form #myForm="ngForm">
+            <div *ngIf="selectedMenu?.id == 1">
+              <div class="row mt-3">
+                <div class="col-md-12 mb-2"
+                *ngIf="model?.qtd_estoque < model?.consumo">
+                  <a class="btn btn-danger mr-2" style="color: #fff;">
+                    Estoque abaixo do consumo.
+                  </a>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group form-group-default">
+                    <label>Código</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.codigo"
+                    name="codigo">
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div class="form-group form-group-default">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.name"
+                    name="name" [required]="true">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-4">
+                  <app-form-select
+                  [label]="'Tipo'"
+                  [list]="[
+                    {id: 'Produto'},
+                    {id: 'Serviço'}
+                  ]"
+                  [key]="'id'"
+                  [text]="'id'"
+                  [(ngModel)]="model.type"
+                  name="type"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-4">
+                  <app-form-currency
+                  [label]="'Preço'"
+                  name="preco"
+                  [(ngModel)]="model.preco"
+                  [required]="true"></app-form-currency>
+                </div>
+                <div class="col-md-4">
+                  <app-form-date
+                  [label]="'Data de Cadastro'"
+                  name="created_at"
+                  [(ngModel)]="model.created_at"
+                  [disabled]="true"
+                  ></app-form-date>
+                </div>
+              </div>
+              <div class="row mt-3" *ngIf="model.type == 'Produto'">
+                <div class="col-md-12">
+                  <app-form-select
+                  [label]="'Instalação'"
+                  [list]="installations"
+                  [key]="'uuid'"
+                  [text]="'name'"
+                  [(ngModel)]="model.installations_uuid"
+                  name="installations_uuid"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-4">
+                  <app-form-currency
+                  [label]="'Estoque Mínimo'"
+                  name="estoque_minimo"
+                  [(ngModel)]="model.estoque_minimo"
+                  [prefix]="''"
+                  [required]="true"></app-form-currency>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Marca</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.marca"
+                    name="marca"
+                    [required]="true">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Modelo</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.modelo"
+                    name="modelo">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3" *ngIf="model.type == 'Produto'">
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Unidade</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.unidade"
+                    name="unidade">
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group form-group-default">
+                    <label>Localização no estoque</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.localizacao_estoque"
+                    name="localizacao_estoque"
+                    [required]="true">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="form-group form-group-default">
+                    <label>Descrição</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.descricao"
+                    name="descricao">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3" *ngIf="model.type == 'Serviço'">
+                <div class="col-md-4">
+                  <app-form-select
+                  [label]="'Categoria do Serviço'"
+                  [list]="[
+                    {id: 'Preventiva'},
+                    {id: 'Inspeção'},
+                    {id: 'Lubrificação'}
+                  ]"
+                  [key]="'id'"
+                  [text]="'id'"
+                  [(ngModel)]="model.categoria"
+                  name="categoria"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-6">
+                  <app-form-time
+                  [label]="'Tempo médio de execução'"
+                  name="tempo_medio_execucao"
+                  [(ngModel)]="model.tempo_medio_execucao"
+                  [required]="true"
+                  ></app-form-time>
+                </div>
+              </div>
+            </div>
+          </form>
+					<div class="text-right mt-3 mb-3">
+						<button class="btn btn-success mr-2"
+            [style.background]="configurations?.color_02"
+            *ngIf="model.type == 'Produto' && model?.uuid
+            && (user?.roles?.includes('administrador') || user?.roles?.includes('operador'))"
+            (click)="insertStock()">Atualizar estoque</button>
+            <button class="btn btn-danger mr-2" (click)="delete()">Excluir</button>
+						<button class="btn btn-success" [style.background]="configurations?.color_01" (click)="save()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card card-profile">
+				<div class="card-header" [style.background]="configurations?.color_01">
+					<div class="profile-picture">
+						<div class="avatar avatar-xl">
+              <app-image-view
+              [(ngModel)]="model.image_uuid"
+              ></app-image-view>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="user-profile text-center">
+						<div class="name">{{model?.name}}</div>
+						<div class="job">{{model?.telefone}}</div>
+						<div class="desc">{{model?.email}}</div>
+					</div>
+				</div>
+				<div class="card-footer" *ngIf="user?.roles?.includes('administrador')">
+					<div class="row user-stats text-center">
+						<div class="col-12 mb-2">
+							<div class="number">Última Compra</div>
+						</div>
+						<div class="col">
+							<div class="number">{{ultimaCompra?.data_compra}}</div>
+							<div class="title">Data</div>
+						</div>
+						<div class="col">
+							<div class="number">R$ {{ultimaCompra?.price}}</div>
+							<div class="title">Valor Pago</div>
+						</div>
+						<div class="col">
+							<div class="number">{{model?.qtd_estoque}}</div>
+							<div class="title">Estoque</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

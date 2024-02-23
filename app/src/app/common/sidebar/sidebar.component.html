@@ -1,0 +1,163 @@
+
+  <div class="sidebar sidebar-style-2">
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+      <div class="sidebar-content">
+        <div class="user">
+          <div class="avatar-sm float-left mr-2">
+            <app-image-view
+            [(ngModel)]="user.image_uuid"
+            name="user_image"
+            [disabled]="true"
+            ></app-image-view>
+          </div>
+          <div class="info">
+            <a data-toggle="collapse" href="#userMenu" aria-expanded="true">
+              <span>
+                {{user?.name}}
+                <span class="user-level">{{user?.roles?.join(',') | capitalize}}</span>
+                <span class="caret"></span>
+              </span>
+            </a>
+            <div class="clearfix"></div>
+            <div class="collapse in" id="userMenu">
+              <ul class="nav">
+                <li>
+                  <a (click)="updatePassword()">
+                    <span class="link-collapse">Alterar Senha</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <ul class="nav nav-primary">
+          <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/service-orders" [style.background]="backgroundColor('/admin/service-orders')">
+              <i class="fas fa-money-check"></i>
+              <p>Ordens de Serviço</p>
+              <span class="badge badge-count">{{getCount('service_orders')}}</span>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/service-orders-kanban" [style.background]="backgroundColor('/admin/service-orders-kanban')">
+              <i class="fas fa-columns"></i>
+              <p>Kanban</p>
+              <span class="badge badge-count">{{getCount('service_orders')}}</span>
+            </a>
+          </li>
+          <li *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')" class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/products" [style.background]="backgroundColor('/admin/products')">
+              <i class="fas fa-people-carry"></i>
+              <p>Produtos/Serviços</p>
+              <span class="badge badge-count">{{getCount('products')}}</span>
+            </a>
+          </li>
+          <li *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')" class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/stock" [style.background]="backgroundColor('/admin/stock')">
+              <i class="fas fa-cubes"></i>
+              <p>Estoque</p>
+              <span class="badge badge-count">{{getCount('stocks')}}</span>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/service-orders-calendar" [style.background]="backgroundColor('/admin/service-orders-calendar')">
+              <i class="fas fa-calendar-alt"></i>
+              <p>Cronograma</p>
+              <span class="badge badge-count">{{getCount('service_orders')}}</span>
+            </a>
+          </li>
+          <li *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')" class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/installations" [style.background]="backgroundColor('/admin/installations')">
+              <i class="fas fa-industry"></i>
+              <p>Instalações</p>
+              <span class="badge badge-count">{{getCount('installations')}}</span>
+            </a>
+          </li>
+          <li *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')" class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/assets" [style.background]="backgroundColor('/admin/assets')">
+              <i class="fas fa-money-check-alt"></i>
+              <p>Ativos</p>
+              <span class="badge badge-count">{{getCount('assets')}}</span>
+            </a>
+          </li>
+          <li *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')" class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/providers" [style.background]="backgroundColor('/admin/providers')">
+              <i class="fas fa-file-signature"></i>
+              <p>Fornecedores</p>
+              <span class="badge badge-count">{{getCount('providers')}}</span>
+            </a>
+          </li>
+          <li *ngIf="user?.roles?.includes('administrador')" class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/persons" [style.background]="backgroundColor('/admin/persons')">
+              <i class="fas fa-users"></i>
+              <p>Recursos Humanos</p>
+              <span class="badge badge-count">{{getCount('persons')}}</span>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')">
+            <a data-toggle="collapse" href="#dashboard">
+              <i class="fas fa-chart-pie"></i>
+              <p>Dashboards</p>
+            </a>
+            <div class="collapse" id="dashboard">
+              <ul class="nav nav-collapse">
+                <!-- <li routerLinkActive="active">
+                  <a routerLink="/admin/dashboard/geral" [style.background]="backgroundColor('/admin/dashboard/geral')">
+                    <p>Geral</p>
+                  </a>
+                </li> -->
+                <li routerLinkActive="active">
+                  <a routerLink="/admin/dashboard/manutencao" [style.background]="backgroundColor('/admin/dashboard/manutencao')">
+                    <p>Manutenções</p>
+                  </a>
+                </li>
+                <li routerLinkActive="active">
+                  <a routerLink="/admin/dashboard/estoque" [style.background]="backgroundColor('/admin/dashboard/estoque')">
+                    <p>Estoque</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item" *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')">
+            <a data-toggle="collapse" href="#relatorios">
+              <i class="fas fa-file-invoice"></i>
+              <p>Relatórios</p>
+            </a>
+            <div class="collapse" id="relatorios">
+              <ul class="nav nav-collapse">
+                <li routerLinkActive="active">
+                  <a (click)="planoManutencao()">
+                    <p>Plano de Manutenção</p>
+                  </a>
+                </li>
+                <li routerLinkActive="active">
+                  <a (click)="relatorioDetalhado()">
+                    <p>Relatório Detalhado</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a (click)="suporte()" [style.background]="backgroundColor('/admin/suporte')">
+              <i class="fas fa-phone-volume"></i>
+              <p>Suporte</p>
+            </a>
+          </li>
+          <li *ngIf="user?.roles?.includes('administrador')" class="nav-item" routerLinkActive="active">
+            <a routerLink="/admin/configurations" [style.background]="backgroundColor('/admin/configurations')">
+              <i class="fas fa-cog"></i>
+              <p>Configurações</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a (click)="logoff()">
+              <i class="fas fa-door-open"></i>
+              <p>Sair</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

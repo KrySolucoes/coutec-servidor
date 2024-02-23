@@ -1,0 +1,27 @@
+@page {
+  size: A4;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+@media print {
+  .pagebreak {
+      clear: both;
+      page-break-after: always;
+  }
+}
+.val-top td{
+  vertical-align: top !important;
+  padding-bottom: 5px;
+}
+table {
+  width: 100%;
+}
+tr {
+  border-bottom: 1px solid;
+}
+tr:nth-child(even) {
+  background-color: #c7edd4;
+}

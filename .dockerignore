@@ -1,0 +1,14 @@
+.git
+.editorconfig
+/.vscode/*
+/node_modules
+/e2e
+/docs
+.gitignore
+*.zip
+**/.vscode
+**/docker-compose*
+**/Dockerfile*
+app/web/node_modules/
+app/web/.env.local
+README.md

@@ -1,0 +1,136 @@
+
+				<div class="panel-header" [style.background]="configurations?.color_01">
+					<div class="page-inner py-5">
+						<div class="pb-2 d-flex align-items-left align-items-md-center flex-column flex-md-row">
+							<div>
+								<h2 class="text-white fw-bold m-auto">Dashboard</h2>
+							</div>
+							<!-- <div class="ml-md-auto">
+								<a class="btn btn-secondary btn-round">Filtros</a>
+							</div> -->
+						</div>
+					</div>
+				</div>
+				<div class="page-inner mt--5">
+					<div class="row">
+						<div class="col">
+							<div class="card">
+								<div class="card-body pb-0">
+									<p class="text-muted">Instalações</p>
+									<h2 class="">{{model?.count_installations}}</h2>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card">
+								<div class="card-body pb-0">
+									<p class="text-muted">Ativos</p>
+									<h2 class="">{{model?.count_assets}}</h2>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card">
+								<div class="card-body pb-0">
+									<p class="text-muted">Ativos parados</p>
+									<h2 class="">{{model.counts?.ativos_parados?.length}}</h2>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card">
+								<div class="card-body pb-0">
+									<p class="text-muted">Técnicos</p>
+									<h2 class="">{{model.counts?.tecnicos?.length}}</h2>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card">
+								<div class="card-body pb-0">
+									<p class="text-muted">Técnicos inoperantes</p>
+									<h2 class="">{{model.counts?.tecnicos_inoperantes?.length}}</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card full-height">
+								<div class="card-body">
+									<div class="card-title">Ordens de Serviço - Últimos 30 dias</div>
+                  <div class="row mt--2">
+                    <div class="col">
+                      <div class="px-2 pb-2 pb-md-0 text-center">
+                        <app-chart-doughnut
+                        *ngIf="statusData"
+                        [showlegend]="true"
+                        [data]="statusData"></app-chart-doughnut>
+                        <h5 class="fw-bold mt-3 mb-0">Status</h5>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="px-2 pb-2 pb-md-0 text-center">
+                        <app-chart-doughnut
+                        *ngIf="tipoData"
+                        [showlegend]="true"
+                        [data]="tipoData"></app-chart-doughnut>
+                        <h5 class="fw-bold mt-3 mb-0">Tipos</h5>
+                      </div>
+                    </div>
+                  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card full-height">
+								<div class="card-body">
+									<div class="card-title">Ativos</div>
+                  <div class="row mt--2">
+                    <div class="col">
+                      <div class="px-2 pb-2 pb-md-0 text-center">
+                        <app-chart-doughnut
+                        *ngIf="ativoType"
+                        [showlegend]="true"
+                        [data]="ativoType"></app-chart-doughnut>
+                        <h5 class="fw-bold mt-3 mb-0">Tipos</h5>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="px-2 pb-2 pb-md-0 text-center">
+                        <app-chart-doughnut
+                        *ngIf="defeitoData"
+                        [showlegend]="true"
+                        [data]="defeitoData"></app-chart-doughnut>
+                        <h5 class="fw-bold mt-3 mb-0">Defeitos - Últimos 30 dias</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col">
+                      <div class="px-2 pb-2 pb-md-0 text-center">
+                        <app-chart-bar
+                        *ngIf="top10AssetsParadas"
+                        [showlegend]="false"
+                        [data]="top10AssetsParadas"></app-chart-bar>
+                        <h5 class="fw-bold mt-3 mb-0">Top 10 dos ativos com mais paradas - Últimos 30 dias</h5>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="px-2 pb-2 pb-md-0 text-center">
+                        <app-chart-bar
+                        *ngIf="top10AssetsTempo"
+                        [showlegend]="false"
+                        [data]="top10AssetsTempo"></app-chart-bar>
+                        <h5 class="fw-bold mt-3 mb-0">Top 10 Tempo de parada dos ativos - Últimos 30 dias</h5>
+                        <h5 class="fw-bold mb-0">Base: Horas</h5>
+                      </div>
+                    </div>
+                  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>

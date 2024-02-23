@@ -1,0 +1,30 @@
+
+
+<div class="page-navs bg-white">
+  <div class="nav-scroller">
+    <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
+      <a class="nav-link active show"  [style.color]="configurations?.color_01" [style.border-color]="configurations?.color_01"  [style.color]="configurations?.color_01" [style.border-color]="configurations?.color_01" data-toggle="tab" href="#tab1">Todos os Fornecedores
+        <span class="count ml-1"></span>
+      </a>
+      <div class="ml-auto">
+        <a class="btn btn-success" [style.background]="configurations?.color_01" routerLink="/admin/providers/new">Novo Fornecedor</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-inner">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-body p-0">
+          <app-table
+          #table
+          [dataSource]="dataSource"
+          [configuration]="configuration"
+          (callbackButton)="callbackTable($event)">
+          </app-table>
+				</div>
+			</div>
+    </div>
+  </div>
+</div>

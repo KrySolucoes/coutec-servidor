@@ -1,0 +1,200 @@
+/* You can add global styles to this file, and also import other style files */
+
+a{
+  cursor: pointer;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-form-field{
+  margin-bottom: -1.25rem;
+  margin-top: 5px;
+  width: 100%;
+}
+.mat-form-field-underline{
+  display: none;
+}
+.mat-form-field-infix{
+  border-top: none
+}
+.mat-datepicker-content .mat-calendar{
+  height: auto;
+}
+.mat-calendar-controls{
+  margin: 0 !important;
+}
+.datepicker-hidden{
+  margin: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  position: absolute !important;
+  bottom: 25px !important;
+  right: 25px !important;
+}
+.datepicker-hidden .mat-form-field-infix{
+  display: none !important;
+}
+.datepicker-hidden .mat-form-field-wrapper{
+  padding: 0 !important;
+}
+.btn{
+  border: none;
+}
+.div-table{
+  overflow: auto;
+}
+.form-group .ng-invalid {
+  border-bottom: red solid 1px;
+  border-radius: 0;
+}
+.mat-dialog-container{
+  padding: 0 !important;
+}
+.mat-dialog-container .page-inner{
+  padding: 0 15px;
+}
+.mat-dialog-container .page-inner .page-title{
+  display: none;
+}
+.mat-dialog-container .page-inner .card-with-nav{
+  margin: 0;
+  box-shadow: none;
+  -webkit-box-shadow: 0 0 0 0;
+}
+.mat-dialog-container .page-inner .page-content{
+  padding: 0;
+}
+.cdk-overlay-container{
+  z-index: 1005;
+}
+.sidebar .sidebar-wrapper, .sidebar .sidebar-wrapper .sidebar-content{
+  padding-bottom: 0;
+}
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #9b9b9b transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #9b9b9b ;
+  border-radius: 10px;
+  border: 0px solid transparent;
+}
+.fc-event-time{
+  display: none;
+}
+.fc-event{
+  margin-bottom: 3px;
+}
+
+table{
+  width: 100%;
+}
+td,
+th {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.mat-sort-header-container {
+  justify-content: center !important;
+}
+
+table>tfoot>tr>td.mat-footer-cell.cdk-footer-cell {
+  white-space: nowrap;
+  padding-right: 25px !important;
+  padding-left: 25px !important;
+}
+app-table td{
+  cursor: pointer;
+}
+
+app-table .mat-paginator-container {
+  justify-content: center;
+}
+
+app-table .mat-sort-header-arrow {
+  margin-right: 10px;
+  left: 0;
+  position: absolute;
+}
+
+app-table .table-title {
+  color: #282828;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+app-table .mat-sort-header-container {
+  height: 30px;
+  width: 100%;
+}
+
+app-table .mat-sort-header-content {
+  margin-left: 22px;
+  margin-right: 30px;
+  width: 100%;
+}
+
+// app-table th:first-child .mat-sort-header-content {
+//   margin-left: 0;
+// }
+
+app-table .table-column {
+  display: flex;
+  height: inherit;
+  align-items: center;
+  justify-content: center;
+}
+
+app-table .hideFooter tfoot {
+  display: none;
+}
+
+app-table tfoot {
+  font-weight: bold;
+}
+
+.justify-content-left {
+  justify-content: left !important;
+}
+
+.justify-content-right {
+  justify-content: right !important;
+}
+
+.mat-paginator-page-size{
+  align-items: center !important;
+}
+.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  padding-bottom: 6px !important;
+}
+.hidden{
+  display: none;
+}
+.form-page-navs .form-group{
+  margin-bottom: auto;
+}
+.form-page-navs .form-group-default .form-control{
+  margin-top: 0;
+  min-height: 27px;
+  margin-bottom: 3px;
+}
+.form-page-navs .mat-form-field{
+  top: 5px;
+}
+app-service-orders-calendar .nav-tabs app-form-select .form-group-default{
+  margin-bottom: 0;
+}

@@ -1,0 +1,525 @@
+
+<div class="page-inner">
+	<h4 class="page-title">Ordem de Serviço - #{{model?.numero}}</h4>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-with-nav">
+				<div class="card-header">
+          <app-nav-tab [navMenu]="navMenu" (selectMenu)="selectMenu($event)"></app-nav-tab>
+				</div>
+				<div class="card-body p-0">
+          <form #myForm="ngForm">
+            <div *ngIf="selectedMenu?.id == 1" class="p-4">
+              <div class="row mt-3">
+                <div class="col-md-3">
+                  <div class="form-group form-group-default">
+                    <label>Número</label>
+                    <input type="text" class="form-control" value="{{model?.numero}}" disabled>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <app-form-select
+                  [label]="'Status'"
+                  [list]="status_list"
+                  [key]="'uuid'"
+                  [text]="'name'"
+                  [(ngModel)]="model.status_uuid"
+                  name="status_uuid"
+                  [disabled]="status_list.length == 1"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Operador que emitiu a OS</label>
+                    <input type="text" class="form-control" value="{{model?.person_emissao?.name}}" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <app-form-select
+                  [label]="'Tipo de Manutenção'"
+                  [list]="tipoManutencaoList"
+                  [key]="'id'"
+                  [text]="'id'"
+                  [(ngModel)]="model.maintenance_type"
+                  name="maintenance_type"
+                  [disabled]="this.model?.uuid && user?.roles?.includes('técnico')"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-3" *ngIf="model?.maintenance_type && model?.maintenance_type != 'Corretiva'">
+                  <app-form-select
+                  [label]="'Periodicidade'"
+                  [list]="[
+                    {id: 'Uma vez'},
+                    {id: 'Diário'},
+                    {id: 'Semanal'},
+                    {id: 'Quinzenal'},
+                    {id: 'Mensal'},
+                    {id: 'Trimestral'},
+                    {id: 'Semestral'},
+                    {id: 'Anual'}
+                  ]"
+                  [key]="'id'"
+                  [text]="'id'"
+                  [(ngModel)]="model.maintenance_frequency"
+                  name="maintenance_frequency"
+                  [disabled]="this.model?.uuid && user?.roles?.includes('técnico')"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-3" *ngIf="model?.maintenance_type && model?.maintenance_type != 'Corretiva' && model?.maintenance_frequency != 'Uma vez'">
+                  <app-form-date
+                  [label]="'Prazo final'"
+                  name="prazo_final"
+                  [(ngModel)]="model.prazo_final"
+                  [disabled]="this.model?.uuid && user?.roles?.includes('técnico')"
+                  [required]="true"
+                  ></app-form-date>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-3">
+                  <app-form-date
+                  [label]="'Data de Abertura da OS'"
+                  name="data_entrada"
+                  [(ngModel)]="model.data_entrada"
+                  [disabled]="true"
+                  ></app-form-date>
+                </div>
+                <div class="col-md-3">
+                  <app-form-date
+                  [label]="'Data Início Execução'"
+                  name="data_inicio"
+                  [(ngModel)]="model.data_inicio"
+                  [disabled]="true"
+                  ></app-form-date>
+                </div>
+                <div class="col-md-3">
+                  <app-form-date
+                  [label]="'Data Conclusão'"
+                  name="data_conclusao"
+                  [(ngModel)]="model.data_conclusao"
+                  [disabled]="true"
+                  ></app-form-date>
+                </div>
+                <div class="col-md-3">
+                  <app-form-date
+                  [label]="'Data Finalização'"
+                  name="data_finalizacao"
+                  [(ngModel)]="model.data_finalizacao"
+                  [disabled]="true"
+                  ></app-form-date>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-3">
+                  <app-form-date
+                  [label]="'Data Prev. Início'"
+                  name="data_prevista_inicio"
+                  [(ngModel)]="model.data_prevista_inicio"
+                  [disabled]="disable"
+                  ></app-form-date>
+                </div>
+                <div class="col-md-3">
+                  <app-form-date
+                  [label]="'Data Prev. Entrega'"
+                  name="data_prev_entrega"
+                  [(ngModel)]="model.data_prev_entrega"
+                  [disabled]="disable"
+                  ></app-form-date>
+                </div>
+                <div class="col-md-3">
+                  <app-form-time
+                  [label]="'Hora Início'"
+                  name="hora_inicio"
+                  [disabled]="disable"
+                  [(ngModel)]="model.hora_inicio"
+                  ></app-form-time>
+                </div>
+                <div class="col-md-3">
+                  <app-form-time
+                  [label]="'Hora Fim'"
+                  name="hora_fim"
+                  [(ngModel)]="model.hora_fim"
+                  [disabled]="disable"
+                  ></app-form-time>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <app-form-select
+                  [label]="'Instalação'"
+                  [list]="installations"
+                  [key]="'uuid'"
+                  [text]="'name'"
+                  [(ngModel)]="model.installation_uuid"
+                  (ngModelChange)="model.asset_uuid = null"
+                  name="installation_uuid"
+                  [disabled]="disable"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <app-form-select
+                  [label]="'Ativo'"
+                  [list]="assetsFilter"
+                  [key]="'uuid'"
+                  [text]="'name'"
+                  [(ngModel)]="model.asset_uuid"
+                  name="asset_uuid"
+                  [disabled]="disable"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group form-group-default">
+                    <label>Marca</label>
+                    <input type="text" class="form-control" value="{{asset?.marca}}" disabled>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group form-group-default">
+                    <label>Modelo</label>
+                    <input type="text" class="form-control" value="{{asset?.modelo}}" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-3">
+                  <app-form-select
+                  [label]="'Condição do Ativo'"
+                  [list]="[
+                    {id: 'Parado'},
+                    {id: 'Funcionando'}
+                  ]"
+                  [key]="'id'"
+                  [text]="'id'"
+                  [(ngModel)]="model.status_ativo"
+                  name="status_ativo"
+                  [disabled]="disable"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-9">
+                  <app-form-select
+                  [label]="'Componentes'"
+                  [list]="components"
+                  [key]="'uuid'"
+                  [text]="'name'"
+                  [(ngModel)]="model.assets"
+                  name="assets"
+                  [multiple]="true"
+                  [disabled]="disable"
+                  ></app-form-select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <app-form-select
+                  [label]="'Técnicos'"
+                  [list]="tecnicos"
+                  [key]="'uuid'"
+                  [text]="'name'"
+                  [(ngModel)]="model.tecnicos"
+                  name="tecnicos"
+                  [multiple]="true"
+                  [disabled]="disable"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6" *ngIf="model?.maintenance_type == 'Corretiva'">
+                  <app-form-select
+                  [label]="'Tipo de Defeito'"
+                  [list]="[
+                    {id: 'ELÉTRICO'},
+                    {id: 'HIDRÁULICO'},
+                    {id: 'LIMPEZA'},
+                    {id: 'LUBRIFICAÇÃO'},
+                    {id: 'MATERIAL INADEQUADO'},
+                    {id: 'MECÂNICO'},
+                    {id: 'OPERACIONAL'},
+                    {id: 'PNEUMÁTICO'},
+                    {id: 'VIDA ÚTIL'},
+                    {id: 'OUTROS'}
+                  ]"
+                  [key]="'id'"
+                  [text]="'id'"
+                  [(ngModel)]="model.tipo_defeito"
+                  name="tipo_defeito"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-6" *ngIf="model?.maintenance_type == 'Corretiva' && model?.tipo_defeito == 'OUTROS'">
+                  <div class="form-group form-group-default">
+                    <label>Tipo de Defeito:</label>
+                    <input type="text" class="form-control" name="tipo_defeito_outro" [(ngModel)]="model.tipo_defeito_outro"
+                    [required]="true">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-group-default">
+                    <label>Causa do Defeito</label>
+                    <textarea class="form-control" name="causa" rows="3" [(ngModel)]="model.causa"
+                    [disabled]="disable"
+                    [required]="model?.maintenance_type == 'Corretiva'">
+                    </textarea>
+                  </div>
+                </div>
+                <div class="col-md-12" *ngIf="model?.maintenance_type == 'Corretiva'">
+                  <div class="form-group form-group-default">
+                    <label>Solução do Problema</label>
+                    <textarea class="form-control" name="solucao" rows="3" [(ngModel)]="model.solucao"
+                    [disabled]="disable">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 mb-1">
+                <div class="col-md-12">
+                  <div class="form-group form-group-default">
+                    <label>Observação</label>
+                    <textarea class="form-control" name="observacao" rows="3" [(ngModel)]="model.observacao"
+                    [disabled]="disable">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right mt-3 mb-3">
+                <button class="btn btn-danger mr-2" (click)="delete()" *ngIf="!user?.roles?.includes('técnico')">Excluir</button>
+                <button class="btn btn-success mr-2" [style.background]="configurations?.color_01" (click)="print()">Imprimir</button>
+                <button class="btn btn-success" [style.background]="configurations?.color_01" (click)="saveComment()">Salvar</button>
+              </div>
+            </div>
+            <div *ngIf="selectedMenu?.id == 2 && this.model?.uuid">
+              <div class="mt-3 pl-4 mb-4 d-flex">
+                <button class="btn btn-success"
+                *ngIf="!disableNewProduct()"
+                [style.background]="configurations?.color_01" (click)="setProduct()">
+                  Inserir Produto/Serviço
+                </button>
+								<div class="card-body p-0 d-flex ml-2">
+                  <div class="form-group form-group-default m-0" style="width: 300px;">
+                    <label>Condição de Pagamento</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    name="condicao_pagamento"
+                    (focusout)="save(null, false)"
+                    [(ngModel)]="model.condicao_pagamento">
+                  </div>
+                  <app-form-currency
+                  class="form-deslocamento m-0" style="width: 300px;"
+                  [label]="'Deslocamento '"
+                  name="deslocamento"
+                  [(ngModel)]="model.deslocamento"
+                  (focusout)="save(null, false)"></app-form-currency>
+									<div class="form-check form-check-inline p-0 p-2 my-auto">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox"
+                      class="custom-control-input"
+                      name="showValues"
+                      [(ngModel)]="showValues"
+                      id="showValues"
+                      (ngModelChange)="save(null, false)">
+											<label class="custom-control-label m-0" for="showValues">Mostrar Valores</label>
+										</div>
+									</div>
+                </div>
+                <div class="card-title ml-auto mr-4" *ngIf="showValues">R$ {{total}}</div>
+              </div>
+              <div *ngIf="selectedProduct && !disableNewProduct()" class="px-4">
+                <div class="row mt-3">
+                  <div [ngClass]="{'col-md-6': showValues, 'col-md-9': !showValues}">
+                    <div class="filter-select">
+                      <div class="form-check form-check-inline">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox"
+                          class="custom-control-input"
+                          name="filterSelectproducts"
+                          [(ngModel)]="filterSelect.products"
+                          id="filterSelectproducts">
+                          <label class="custom-control-label m-0" for="filterSelectproducts">Produtos</label>
+                        </div>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox"
+                          class="custom-control-input"
+                          name="filterSelectServices"
+                          [(ngModel)]="filterSelect.services"
+                          id="filterSelectServices">
+                          <label class="custom-control-label m-0" for="filterSelectServices">Serviços</label>
+                        </div>
+                      </div>
+                    </div>
+                    <app-form-select
+                    [label]="'Produto/Serviço'"
+                    [list]="productsFilter"
+                    [key]="'uuid'"
+                    [text]="'name'"
+                    name="product_uuid"
+                    [(ngModel)]="selectedProduct.product_uuid"
+                    (ngModelChange)="loadProductSelect($event)"
+                    [required]="true"
+                    ></app-form-select>
+                  </div>
+                  <div class="col-md-3" *ngIf="showValues">
+                    <app-form-currency
+                    [label]="'Preço'"
+                    name="preco"
+                    [(ngModel)]="selectedProduct.preco"
+                    [required]="true"></app-form-currency>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group form-group-default">
+                      <label>Quantidade</label>
+                      <input
+                      type="number"
+                      class="form-control"
+                      name="quantidade"
+                      [(ngModel)]="selectedProduct.quantidade"
+                      [required]="true">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <div class="form-group form-group-default">
+                      <label>Detalhe</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      name="detalhe"
+                      [(ngModel)]="selectedProduct.detalhe">
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right mb-4">
+                  <button class="btn btn-success"
+                  (click)="saveProduct()"
+                  [disabled]="!myForm?.valid"
+                  >Salvar</button>
+                  <button class="btn btn-success ml-3"
+                  (click)="deleteProduct(selectedProduct?.uuid)"
+                  *ngIf="selectedProduct?.uuid"
+                  >Excluir</button>
+                </div>
+              </div>
+              <div *ngIf="model?.products && model?.products?.length > 0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Produto/Serviço</th>
+                      <th scope="col">Detalhe</th>
+                      <th scope="col">Tempo de execução</th>
+                      <th scope="col">Qtd</th>
+                      <th scope="col" *ngIf="showValues">Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of model.products" class="nav-item">
+                      <td><a (click)="setProduct(product)">{{product.product_name}}</a></td>
+                      <td>{{product.detalhe}}</td>
+                      <td>{{product.product?.tempo_medio_execucao}}</td>
+                      <td>{{product.quantidade}}</td>
+                      <td *ngIf="showValues">R$ {{product.preco}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div *ngIf="selectedMenu?.id == 3">
+              <div class="mt-3 pl-4 mb-4 d-flex">
+                <button class="btn btn-success" [style.background]="configurations?.color_01" (click)="setEvidence()">
+                  Inserir Arquivo
+                </button>
+              </div>
+              <div *ngIf="selectedEvidence" class="px-4">
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <div class="form-group form-group-default">
+                      <label>Nome</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      [(ngModel)]="selectedEvidence.name">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group form-group-default">
+                      <label>Link</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      name="link"
+                      [(ngModel)]="selectedEvidence.link">
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right mb-4">
+                  <button class="btn btn-success"
+                  (click)="saveEvidence()"
+                  [disabled]="!myForm?.valid"
+                  >Salvar</button>
+                </div>
+              </div>
+              <div *ngIf="model?.evidences && model?.evidences?.length > 0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Arquivo</th>
+                      <th scope="col">Link</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let evidence of model.evidences" class="nav-item">
+                      <td><a (click)="setEvidence(evidence)">{{evidence.name}}</a></td>
+                      <td><a href="{{evidence.link}}" target="_blank">{{evidence.link}}</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div *ngIf="selectedMenu?.id == 4">
+              <div>
+                <div class="mt-3 pl-4 mb-4 d-flex">
+                  <button class="btn btn-success" [style.background]="configurations?.color_01" (click)="insertComment()">
+                    Inserir Comentário
+                  </button>
+                </div>
+                <table class="table" *ngIf="model?.comments && model?.comments?.length > 0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Usuário</th>
+                      <th scope="col">Comentário</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Status Anterior</th>
+                      <th scope="col">Novo Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let comment of model.comments" class="nav-item">
+                      <td>{{comment.person_name}}</td>
+                      <td>{{comment.text_comment}}</td>
+                      <td>{{comment.on_save}}</td>
+                      <td>{{statusByUuid(comment.last_status_uuid)?.name}}</td>
+                      <td>{{statusByUuid(comment.status_uuid)?.name}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

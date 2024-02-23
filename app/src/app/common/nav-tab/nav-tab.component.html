@@ -1,0 +1,14 @@
+
+<div class="row row-nav-line">
+	<ul class="nav nav-tabs nav-line nav-color-secondary w-100 pl-4" role="tablist">
+    <li *ngFor="let menu of navMenu" class="nav-item">
+      <a class="nav-link show"
+      [ngClass]="{'active': menu?.active}"
+      [style.color]="configurations?.color_01"
+      [style.border-color]="menu?.active ? configurations?.color_01 : ''"
+      (click)="setSelectMenu(menu)">
+        {{menu?.name}}
+      </a>
+    </li>
+  </ul>
+</div>

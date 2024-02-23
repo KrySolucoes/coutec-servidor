@@ -1,0 +1,61 @@
+<div class="page-navs bg-white">
+  <div class="nav-scroller">
+    <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
+      <a class="nav-link active show"  [style.color]="configurations?.color_01" [style.border-color]="configurations?.color_01" data-toggle="tab" href="#tab1">Ordens de Serviço
+        <span class="count ml-1"></span>
+      </a>
+      <div class="row form-page-navs ml-auto mr-3">
+        <div class="col-md-12">
+          <app-form-select
+          [list]="installations"
+          [key]="'uuid'"
+          [text]="'name'"
+          name="installation_uuid"
+          [placeholder]="'Instalação'"
+          [(ngModel)]="installation_uuid"
+          (ngModelChange)="get()"
+          ></app-form-select>
+        </div>
+      </div>
+      <a class="nav-link active show ml-0 m-0"
+        [style.color]="configurations?.color_01"
+        [style.border-color]="'#fff'">
+        Filtro - Início:
+      </a>
+      <div class="row form-page-navs mr-3 ml-0">
+        <div class="col-md-12">
+          <app-form-date
+          name="inicio"
+          [(ngModel)]="filter.inicio"
+          (ngModelChange)="get()"></app-form-date>
+        </div>
+      </div>
+      <a class="nav-link active show m-0"
+        [style.color]="configurations?.color_01"
+        [style.border-color]="'#fff'">
+        Filtro - Término:
+      </a>
+      <div class="row form-page-navs ml-0 mr-3">
+        <div class="col-md-12">
+          <app-form-date
+          name="termino"
+          [(ngModel)]="filter.termino"
+          (ngModelChange)="get()"></app-form-date>
+        </div>
+      </div>
+      <div class="">
+        <a class="btn btn-success"
+        [style.background]="configurations?.color_01"
+        *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador') || user?.roles?.includes('técnico')"
+        routerLink="/admin/service-orders/new">
+          Nova Ordem de Serviço
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-kanban
+*ngIf="cards && cards.length > 0"
+[cards]="cards"
+(callback)="saveKanban($event)"
+></app-kanban>

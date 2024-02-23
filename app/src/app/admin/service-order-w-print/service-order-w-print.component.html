@@ -1,0 +1,241 @@
+<div class="row d-inline">
+  <div class="col-md-12">
+    <form #myForm="ngForm">
+        <div class="row">
+          <div class="col-md-6">
+            <app-form-select
+            [label]="'Instalação'"
+            [list]="installations"
+            [key]="'uuid'"
+            [text]="'name'"
+            [(ngModel)]="model.installations_uuid"
+            name="installations_uuid"
+            (ngModelChange)="get()"
+            ></app-form-select>
+          </div>
+          <div class="col-md-6">
+            <app-form-select
+            [label]="'Ano'"
+            [list]="anos"
+            [key]="'id'"
+            [text]="'name'"
+            [(ngModel)]="model.ano"
+            name="ano"
+            (ngModelChange)="get()"
+            ></app-form-select>
+          </div>
+        </div>
+    </form>
+  </div>
+  <div class="col-md-12">
+    <div class="text-right mt-3 mb-3">
+      <button class="btn btn-success"
+      [style.background]="configurations?.color_01"
+      (click)="print()"
+      >Imprimir</button>
+    </div>
+  </div>
+</div>
+<div class="modal-os-print" id="print-section">
+  <style type="text/css" media="print">
+    @page { size: landscape; }
+  </style>
+  <div style="display: flex;border-bottom: solid 1px #4472C4;padding-bottom: 10px;">
+    <div style="max-width: 300px;align-items: center;display: flex;">
+      <img src="{{configurations?.image?.data}}" style="max-width: 100%;max-height: 100%;">
+    </div>
+    <div>
+      <p style="font-weight: bold;margin: 0 10px;">{{configurations?.empresa_nome}}</p>
+      <p style="font-weight: bold;margin: 0 10px;">CNPJ: {{configurations?.empresa_cnpj}}</p>
+      <p style="margin: 0 10px;font-size: 10px;">{{configurations?.empresa_endereco}}</p>
+      <p style="margin: 0 10px;font-size: 10px;">{{configurations?.empresa_telefone}} – {{configurations?.empresa_email}} - {{configurations?.empresa_site}}</p>
+      <p *ngIf="instalacaoSelecionada" style="margin: 0 10px;font-size: 10px;">Instalação: {{instalacaoSelecionada?.name}}</p>
+    </div>
+  </div>
+  <div>
+    <table class="mapa52w" style="border: 1px solid black;border-collapse: collapse;">
+      <tr>
+        <th style="border: 1px solid black;border-collapse: collapse;" *ngIf="!instalacaoSelecionada">Instalação</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">Ativo</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">Tipo</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">1</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">2</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">3</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">4</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">5</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">6</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">7</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">8</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">9</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">10</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">11</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">12</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">13</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">14</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">15</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">16</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">17</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">18</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">19</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">20</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">21</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">22</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">23</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">24</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">25</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">26</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">27</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">28</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">29</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">30</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">31</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">32</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">33</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">34</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">35</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">36</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">37</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">38</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">39</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">40</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">41</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">42</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">43</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">44</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">45</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">46</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">47</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">48</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">49</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">50</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">51</th>
+        <th style="border: 1px solid black;border-collapse: collapse;">52</th>
+      </tr>
+      <ng-container *ngFor="let instalacao of data">
+        <tr>
+          <th [attr.rowspan]="getRowSpan(instalacao?.data)" *ngIf="!instalacaoSelecionada" style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.instalacao}}</th>
+          <!-- <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.instalacao}}</th> -->
+          <ng-container *ngIf="instalacao?.data?.length > 0;">
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.ativo}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.tipo}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s01}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s02}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s03}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s04}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s05}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s06}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s07}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s08}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s09}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s10}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s11}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s12}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s13}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s14}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s15}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s16}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s17}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s18}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s19}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s20}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s21}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s22}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s23}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s24}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s25}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s26}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s27}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s28}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s29}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s30}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s31}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s32}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s33}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s34}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s35}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s36}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s37}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s38}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s39}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s40}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s41}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s42}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s43}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s44}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s45}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s46}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s47}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s48}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s49}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s50}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s51}}</th>
+            <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.data[0]?.s52}}</th>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="instalacao?.data?.length > 1;">
+          <ng-container *ngFor="let item of instalacao?.data; let i = index">
+            <ng-container *ngIf="i > 0">
+              <tr>
+                <!-- <th style="border: 1px solid black;border-collapse: collapse;">{{instalacao?.instalacao}}</th> -->
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.ativo}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.tipo}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s01}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s02}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s03}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s04}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s05}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s06}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s07}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s08}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s09}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s10}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s11}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s12}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s13}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s14}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s15}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s16}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s17}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s18}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s19}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s20}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s21}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s22}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s23}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s24}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s25}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s26}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s27}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s28}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s29}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s30}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s31}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s32}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s33}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s34}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s35}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s36}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s37}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s38}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s39}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s40}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s41}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s42}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s43}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s44}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s45}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s46}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s47}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s48}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s49}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s50}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s51}}</th>
+                <th style="border: 1px solid black;border-collapse: collapse;">{{item?.s52}}</th>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </table>
+  </div>
+</div>

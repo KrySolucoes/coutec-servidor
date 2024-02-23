@@ -1,0 +1,62 @@
+
+
+<div class="page-navs bg-white">
+  <div class="nav-scroller">
+    <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
+      <a class="nav-link active show"  [style.color]="configurations?.color_01" [style.border-color]="configurations?.color_01" data-toggle="tab" href="#tab1">Tipo de Ativo
+        <span class="count ml-1"></span>
+      </a>
+      <div class="ml-auto">
+        <a class="btn btn-success" [style.background]="configurations?.color_01" routerLink="/admin/asset-types">Voltar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-inner">
+	<div class="row">
+		<div class="col-md-12 page-content">
+			<div class="card card-with-nav">
+				<div class="card-header">
+          <app-nav-tab [navMenu]="navMenu" (selectMenu)="selectMenu($event)"></app-nav-tab>
+				</div>
+				<div class="card-body p-0">
+          <form #myForm="ngForm">
+            <div *ngIf="selectedMenu?.id == 1" class="p-4">
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Tipo</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="model.name"
+                    name="name"
+                    required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <app-form-select
+                  [label]="'Referência'"
+                  [list]="[
+                    {id: 'Ativo'},
+                    {id: 'Componente'}
+                  ]"
+                  [key]="'id'"
+                  [text]="'id'"
+                  [(ngModel)]="model.type"
+                  name="type"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+              </div>
+              <div class="text-right mt-3 mb-3">
+                <button class="btn btn-danger mr-2" (click)="delete()">Excluir</button>
+                <button class="btn btn-success" [style.background]="configurations?.color_01" (click)="save()">Salvar</button>
+              </div>
+            </div>
+          </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

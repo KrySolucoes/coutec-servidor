@@ -1,0 +1,42 @@
+<div class="page-inner page-inner-fill">
+	<div id="myKanban" class="board">
+    <div class="kanban-boards">
+      <div class="kanban-board" *ngFor="let card of cards">
+        <header class="kanban-board-header"
+        (click)="normalizeHeight()">
+          <div class="kanban-title-board">{{card.name}}</div>
+        </header>
+        <main class="kanban-drag"
+        id="{{card.id}}"
+        cdkDropList
+        [cdkDropListData]="card.itens"
+        [cdkDropListConnectedTo]="connectedTo(card)"
+        (cdkDropListDropped)="drop($event)">
+          <div class="kanban-item"
+          *ngFor="let item of card.itens"
+          [cdkDragDisabled]="item?.loading || card?.disabled || item?.disabled"
+          cdkDrag
+          (click)="link(item)">
+            <div class="spinner-border spinner-border-sm mr-2" role="status" *ngIf="item?.loading">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <a class="kanban-title">{{item.title}}</a>
+            <div class="kanban-badges" *ngIf="item?.badges">
+              <div class="kanban-badge"
+              [ngClass]="item?.class"
+                *ngFor="let item of item.badges">
+                <ng-container *ngIf="item?.show === undefined || item?.show === true">
+                  <i class="far" [ngClass]="item.icon" *ngIf="item?.icon"></i>
+                  <span class="badge-text">{{item.content}}</span>
+                </ng-container>
+              </div>
+            </div>
+            <div class="kanban-edit">
+              <i class="fa fa-pencil-alt"></i>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+	</div>
+</div>

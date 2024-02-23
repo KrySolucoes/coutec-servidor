@@ -1,0 +1,20 @@
+
+<div class="form-group form-group-default">
+  <label>{{label}}</label>
+  <input type="text"
+  class="form-control"
+  name="date_input"
+  mask="d0/M0/0000"
+  [(ngModel)]="value"
+  [required]="required"
+  [dropSpecialCharacters]="false"
+  [disabled]="disabled">
+  <mat-form-field class="datepicker-hidden">
+    <input matInput
+    [matDatepicker]="picker"
+    (dateChange)="setDatepicker($event)"
+    [disabled]="disabled">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>

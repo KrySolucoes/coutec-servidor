@@ -1,0 +1,50 @@
+<div class="login">
+
+  <div class="wrapper wrapper-login">
+    <div class="container container-login animated fadeIn" *ngIf="page == 'login'">
+      <h3 class="text-center">Coutec</h3>
+      <div class="login-form">
+        <div class="form-group form-floating-label">
+          <input [(ngModel)]="_username" id="username" name="username" type="text" class="form-control input-border-bottom" required>
+          <label for="username" class="placeholder">Usuário</label>
+        </div>
+        <div class="form-group form-floating-label">
+          <input [(ngModel)]="_password" id="password" name="password"
+          type="{{showPassword ? 'text' : 'password'}}"
+          class="form-control input-border-bottom" required>
+          <label for="password" class="placeholder">Senha</label>
+          <div class="show-password" (click)="showPassword = !showPassword">
+            <i class="icon-eye"></i>
+          </div>
+        </div>
+        <div class="row form-sub m-0" >
+          <a class="link float-right" (click)="page = 'senha'">Esqueceu a senha?</a>
+        </div>
+        <div class="form-action mb-3">
+          <a class="btn btn-primary btn-rounded btn-login" (click)="login()"
+          [style.background]="configurations?.color_01">Login</a>
+        </div>
+        <div class="login-account" *ngIf="false">
+          <span class="msg">Don't have an account yet ?</span>
+          <a id="show-signup" class="link">Sign Up</a>
+        </div>
+      </div>
+    </div>
+    <div class="container container-signup animated fadeIn" *ngIf="page == 'senha'">
+      <h3 class="text-center">Coutec</h3>
+      <div class="login-form">
+        <div class="form-group form-floating-label">
+          <input [(ngModel)]="_username" id="username" name="username" type="text" class="form-control input-border-bottom" required>
+          <label for="username" class="placeholder">Usuário</label>
+        </div>
+        <div class="row form-sub m-0" >
+          <a class="link float-right" (click)="page = 'login'">Fazer login</a>
+        </div>
+        <div class="form-action mb-3">
+          <a class="btn btn-primary btn-rounded btn-login" (click)="recuperaSenha()"
+          [style.background]="configurations?.color_01">Recuperar senha</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

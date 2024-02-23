@@ -1,0 +1,82 @@
+
+<div class="panel-header" [style.background]="configurations?.color_01">
+  <div class="page-inner py-5">
+    <div class="pb-2 d-flex align-items-left align-items-md-center flex-column flex-md-row">
+      <div>
+        <h2 class="text-white fw-bold m-auto">Dashboard</h2>
+      </div>
+      <!-- <div class="ml-md-auto">
+        <a class="btn btn-secondary btn-round">Filtros</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+<div class="page-inner mt--5">
+  <div class="row mt-2">
+    <div class="col">
+      <app-form-select
+      [label]="'Instalação'"
+      [list]="installations"
+      [key]="'uuid'"
+      [text]="'name'"
+      [(ngModel)]="model.installations_uuid"
+      name="installations_uuid"
+      (ngModelChange)="get()"
+      ></app-form-select>
+    </div>
+    <div class="col">
+      <app-form-date
+      [label]="'Data início'"
+      name="data_inicio"
+      [(ngModel)]="model.data_inicio"
+      (ngModelChange)="get()"
+      ></app-form-date>
+    </div>
+    <div class="col">
+      <app-form-date
+      [label]="'Data final'"
+      name="data_final"
+      [(ngModel)]="model.data_final"
+      (ngModelChange)="get()"
+      ></app-form-date>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Valor Total</p>
+          <h2 class="">{{toMoney(valor_do_estoque, 2, 'R$ ')}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Valor Investido do Período</p>
+          <h2 class="">{{toMoney(valor_investido, 2, 'R$ ')}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card full-height">
+        <div class="card-body">
+          <div class="card-title">Estoque</div>
+          <div class="row mt--2">
+            <div class="col">
+              <div class="py-2 pb-md-0 text-center">
+                <app-table
+                #table
+                [dataSource]="dataSource"
+                [configuration]="configuration">
+                </app-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

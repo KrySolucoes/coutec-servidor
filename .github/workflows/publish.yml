@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Docker login
+      env:
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile.app --tag krysolucoes/coutec:app
+    - name: Docker Push
+      run: docker push krysolucoes/coutec:app
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile.api --tag krysolucoes/coutec:api
+    - name: Docker Push
+      run: docker push krysolucoes/coutec:api

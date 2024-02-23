@@ -1,0 +1,12 @@
+<div class="form-group form-group-default">
+  <label>{{label}}{{prefix}}</label>
+  <input type="text" class="form-control"
+  currencyMask
+  name="currency_mask"
+  [(ngModel)]="value"
+  [options]="{ prefix: prefix, thousands: '.', decimal: ',' }"
+  [required]="required"
+  [disabled]="disabled"
+  (ngModelChange)="format()"
+  />
+</div>

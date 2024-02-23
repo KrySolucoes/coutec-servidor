@@ -1,0 +1,51 @@
+
+
+<div class="page-navs bg-white">
+  <div class="nav-scroller">
+    <div class="nav nav-tabs nav-line nav-color-secondary d-flex align-items-center justify-contents-center w-100">
+      <a class="nav-link active show"
+      [style.color]="configurations?.color_01"
+      [style.border-color]="page=='produto' ? configurations?.color_01 : '#fff'"
+      (click)="setPage('produto')"
+      data-toggle="tab">
+        Produtos
+      </a>
+      <a class="nav-link active show"
+      [style.color]="configurations?.color_01"
+      [style.border-color]="page=='servico' ? configurations?.color_01 : '#fff'"
+      (click)="setPage('servico')"
+      data-toggle="tab">
+        Serviços
+      </a>
+      <div class="ml-auto">
+        <a class="btn btn-success"
+        [style.background]="configurations?.color_01"
+        routerLink="/admin/products/new">Novo Produto/Serviço</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-inner">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-body p-0">
+          <app-table
+          *ngIf="page=='servico'"
+          #table
+          [dataSource]="dataSource"
+          [configuration]="configurationService"
+          (callbackButton)="callbackTable($event)">
+          </app-table>
+          <app-table
+          *ngIf="page=='produto'"
+          #table
+          [dataSource]="dataSource"
+          [configuration]="configuration"
+          (callbackButton)="callbackTable($event)">
+          </app-table>
+				</div>
+			</div>
+    </div>
+  </div>
+</div>

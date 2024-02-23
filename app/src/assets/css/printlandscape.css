@@ -1,0 +1,21 @@
+@page {
+  size: landscape;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+@media print {
+  .pagebreak {
+      clear: both;
+      page-break-after: always;
+  }
+}
+.val-top td{
+  vertical-align: top !important;
+  padding-bottom: 5px;
+}
+tr:nth-child(even) {
+  background-color: #c7edd4;
+}

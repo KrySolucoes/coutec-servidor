@@ -1,0 +1,122 @@
+<div class="row d-inline">
+  <div class="col-md-12">
+    <form #myForm="ngForm">
+        <div class="row">
+          <div class="col-md-12">
+            <app-form-select
+            [label]="'Instalação'"
+            [list]="installations"
+            [key]="'uuid'"
+            [text]="'name'"
+            [(ngModel)]="model.installation_uuid"
+            name="installation_uuid"
+            [required]="true"
+            (ngModelChange)="get()"
+            ></app-form-select>
+          </div>
+          <div class="col-md-6">
+            <app-form-select
+            [label]="'Ativo'"
+            [list]="assetsFilter"
+            [key]="'uuid'"
+            [text]="'name'"
+            [(ngModel)]="model.asset_uuid"
+            name="asset_uuid"
+            (ngModelChange)="get()"
+            ></app-form-select>
+          </div>
+          <div class="col-md-6">
+            <app-form-select
+            [label]="'Tipo de OS'"
+            [list]="[
+              {name: 'Corretiva', id: '\'Corretiva\''},
+              {name: 'Preventiva', id: '\'Preventiva\''},
+              {name: 'Inspeção', id: '\'Inspeção\''},
+              {name: 'Preditiva', id: '\'Preditiva\''},
+              {name: 'Lubrificação', id: '\'Lubrificação\''},
+            ]"
+            [key]="'id'"
+            [text]="'name'"
+            [(ngModel)]="model.maintenance_type"
+            name="maintenance_type"
+            [multiple]="true"
+            (ngModelChange)="get()"
+            ></app-form-select>
+          </div>
+          <div class="col-md-6">
+            <app-form-date
+            [label]="'Início'"
+            name="start"
+            [(ngModel)]="model.start"
+            [required]="true"
+            (ngModelChange)="get()"
+            ></app-form-date>
+          </div>
+          <div class="col-md-6">
+            <app-form-date
+            [label]="'Término'"
+            name="end"
+            [(ngModel)]="model.end"
+            [required]="true"
+            (ngModelChange)="get()"
+            ></app-form-date>
+          </div>
+        </div>
+    </form>
+  </div>
+  <div class="col-md-12">
+    <div class="text-right mt-3 mb-3">
+      <button class="btn btn-success"
+      [style.background]="configurations?.color_01"
+      (click)="print()"
+      [disabled]="!myForm?.valid"
+      >Imprimir</button>
+    </div>
+  </div>
+</div>
+<div class="modal-os-print" id="print-section">
+  <style type="text/css" media="print">
+    @page { size: landscape; }
+  </style>
+  <div style="display: flex;border-bottom: solid 1px #4472C4;padding-bottom: 10px;">
+    <div style="max-width: 300px;align-items: center;display: flex;">
+      <img src="{{configurations?.image?.data}}" style="max-width: 100%;max-height: 100%;">
+    </div>
+    <div>
+      <p style="font-weight: bold;margin: 0 10px;">{{configurations?.empresa_nome}}</p>
+      <p style="font-weight: bold;margin: 0 10px;">CNPJ: {{configurations?.empresa_cnpj}}</p>
+      <p style="margin: 0 10px;font-size: 10px;">{{configurations?.empresa_endereco}}</p>
+      <p style="margin: 0 10px;font-size: 10px;">{{configurations?.empresa_telefone}} – {{configurations?.empresa_email}} - {{configurations?.empresa_site}}</p>
+    </div>
+  </div>
+  <div style="border-bottom: solid 1px #4472C4;padding: 10px 0;">
+    <p style="font-weight: bold;margin: 0;text-align: center;padding: 10px 0;font-size: 16px;">Relatório Detalhado</p>
+    <p style="font-weight: bold;margin: 0;"> 1. Instalação: {{installation_name}}</p>
+    <div style="display: flex;">
+        <div style="width: -webkit-fill-available">
+          <p style="margin: 0;">Período: De {{model?.start}} a {{model?.end}}</p>
+        </div>
+    </div>
+  </div>
+  <div style="border-bottom: solid 1px #4472C4;padding: 10px 0;">
+      <p style="font-weight: bold;margin: 0;">2. Cronograma</p>
+      <div *ngFor="let cronograma of model?.cronograma?.cronograma_grupos" style="padding-top: 10px;">
+        <p style="font-weight: bold;margin: 0;">{{cronograma?.mes_ano}}</p>
+        <p style="font-weight: bold;margin: 0;">Manutenção dos ativos:</p>
+        <table class="val-top">
+          <ng-container *ngFor="let asset of cronograma?.manutencoes">
+            <tr>
+              <td style="border-right: solid 1px; text-align: left !important;">{{asset?.data_inicio}} {{asset?.data_os}}</td>
+              <td style="border-right: solid 1px; text-align: left !important;">Duração: {{asset?.duracao}}</td>
+              <td style="border-right: solid 1px; text-align: left !important;">{{asset?.ativo}}</td>
+              <td style="border-right: solid 1px; text-align: left !important;">OS {{asset?.numero}}</td>
+              <td style="border-right: solid 1px; text-align: left !important;">{{asset?.tipo}}</td>
+              <td style="text-align: left !important;">Técnicos {{asset?.tecnico}}</td>
+              <td style="text-align: left !important;">{{asset?.servico}}</td>
+              <td style="text-align: left !important;">{{asset?.produto}}</td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+  </div>
+</div>

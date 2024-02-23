@@ -1,0 +1,157 @@
+
+<div class="page-inner">
+	<h4 class="page-title">Cadastro - {{model?.name}}</h4>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card card-with-nav">
+				<div class="card-header">
+          <app-nav-tab [navMenu]="navMenu" (selectMenu)="selectMenu($event)"></app-nav-tab>
+				</div>
+				<div class="card-body">
+          <form #myForm="ngForm">
+            <div *ngIf="selectedMenu?.id == 1">
+              <div class="row mt-3">
+                <div class="col-md-9">
+                  <div class="form-group form-group-default">
+                    <label>Nome</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="model.name"
+                    name="name"
+                    required>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <app-form-select
+                  [label]="'Status'"
+                  [list]="[
+                    {id: 'Ativo'},
+                    {id: 'Inativo'}
+                  ]"
+                  [key]="'id'"
+                  [text]="'id'"
+                  [(ngModel)]="model.status"
+                  name="status"
+                  [required]="true"
+                  ></app-form-select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>CPF / CNPJ</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    mask="000.000.000-00||00.000.000/0000-00"
+                    [(ngModel)]="model.cpf_cnpj"
+                    name="cpf_cnpj">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Telefone</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    mask="(00) 00000-0000||(00) 0000-0000"
+                    [(ngModel)]="model.telefone"
+                    name="telefone">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <app-form-date
+                  [label]="'Data de Admissão'"
+                  name="data_admissao"
+                  [(ngModel)]="model.data_admissao"
+                  ></app-form-date>
+                </div>
+                <div class="col-md-6">
+                  <app-form-date
+                  [label]="'Data de Nascimento'"
+                  name="data_nascimento"
+                  [(ngModel)]="model.data_nascimento"
+                  ></app-form-date>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Email</label>
+                    <input
+                    type="email"
+                    class="form-control"
+                    placeholder="hello@example.com"
+                    [(ngModel)]="model.email"
+                    name="email"
+                    required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Função</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="model.funcao"
+                    name="funcao">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <app-form-select
+                  [label]="'Instalação'"
+                  [list]="installations"
+                  [key]="'uuid'"
+                  [text]="'nome_fantasia'"
+                  [(ngModel)]="model.installation_uuid"
+                  [multiple]="true"
+                  name="installation_uuid"
+                  ></app-form-select>
+                </div>
+                <div class="col-md-6">
+                  <app-form-select
+                  [label]="'Perfil'"
+                  [list]="profiles"
+                  [key]="'uuid'"
+                  [text]="'name'"
+                  [(ngModel)]="model.profile_uuid"
+                  name="profile_uuid"
+                  ></app-form-select>
+                </div>
+              </div>
+            </div>
+          </form>
+					<div class="text-right mt-3 mb-3">
+            <button class="btn btn-danger mr-2" (click)="delete()">Excluir</button>
+						<button class="btn btn-success" [style.background]="configurations?.color_01" (click)="save()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card card-profile">
+				<div class="card-header" [style.background]="configurations?.color_01">
+					<div class="profile-picture">
+						<div class="avatar avatar-xl">
+              <app-image-view
+              [(ngModel)]="model.image_uuid"
+              ></app-image-view>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="user-profile text-center">
+						<div class="name">{{model?.name}}</div>
+						<div class="job">{{model?.telefone}}</div>
+						<div class="desc">{{model?.email}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

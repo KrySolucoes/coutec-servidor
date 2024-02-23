@@ -1,0 +1,11 @@
+FROM alpine:3.11.2
+RUN apk update --no-cache && \
+    apk add --virtual .build-dependencies tzdata python3-dev py3-pip libffi-dev openssl-dev build-base musl-dev gcc && \
+    apk add postgresql-dev netcat-openbsd
+RUN cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime && \
+	echo "America/Sao_Paulo" >  /etc/timezone
+COPY ./api/requirements.txt /requirements.txt
+RUN pip3 install -r requirements.txt
+COPY ./api .
+COPY --from=krysolucoes/coutec:app /app/dist/coutec /app/web/build
+CMD source /.env && uwsgi --socket 0.0.0.0:$FLASK_PORT --protocol=http -w wsgi:app

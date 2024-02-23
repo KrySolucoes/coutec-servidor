@@ -1,0 +1,117 @@
+<div class="modal-os-print" id="print-section">
+  <div style="display: flex;border-bottom: solid 1px #4472C4;margin-bottom: 10px">
+    <div style="max-width: 300px;align-items: center;display: flex;margin-bottom: 10px">
+      <img src="{{configurations?.image?.data}}" style="max-width: 100%;max-height: 100%;">
+    </div>
+    <div>
+      <p style="font-weight: bold;margin: 0 10px;">{{configurations?.empresa_nome}}</p>
+      <p style="font-weight: bold;margin: 0 10px;">CNPJ: {{configurations?.empresa_cnpj}}</p>
+      <p style="margin: 0 10px;font-size: 10px;">{{configurations?.empresa_endereco}}</p>
+      <p style="margin: 0 10px;font-size: 10px;">{{configurations?.empresa_telefone}} – {{configurations?.empresa_email}} - {{configurations?.empresa_site}}</p>
+    </div>
+  </div>
+  <div style="display: flex;border-bottom: solid 1px #4472C4;margin-bottom: 10px">
+    <div style="width: fit-content;min-width: fit-content;margin-right: 15px;margin-bottom: 10px">
+      <p style="font-weight: bold;margin: 0;">ORDEM DE SERVIÇO N° {{model?.numero}}</p>
+      <p style="font-weight: bold;margin: 0;">Data Prevista de Início: {{model?.data_prevista_inicio?.split(' ')[0]}}</p>
+      <p style="font-weight: bold;margin: 0;">Hora de Início: {{model?.hora_inicio}}</p>
+      <p style="font-weight: bold;margin: 0;">Tipo de Ordem de Serviço: {{model?.maintenance_type}}</p>
+    </div>
+    <div style="width: fit-content;min-width: fit-content;">
+      <p style="font-weight: bold;margin: 0;">Data da criação: {{model?.data_entrada?.split(' ')[0]}}</p>
+      <p style="font-weight: bold;margin: 0;">Data Prevista de Conclusão: {{model?.data_prev_entrega?.split(' ')[0]}}</p>
+      <p style="font-weight: bold;margin: 0;">Hora de Fim: {{model?.hora_fim}}</p>
+      <p style="font-weight: bold;margin: 0;">Periodicidade: {{model?.maintenance_frequency}}</p>
+    </div>
+  </div>
+  <div style="border-bottom: solid 1px #4472C4;margin-bottom: 10px">
+    <p style="font-weight: bold;margin: 0;">Instalação: {{model?.installation?.name}}</p>
+    <p style="margin: 0;">Endereço: {{model?.installation?.logradouro}}, nº {{model?.installation?.numero}}, {{model?.installation?.complemento}}; Bairro {{model?.installation?.bairro}}; Cidade {{model?.installation?.cidade}}; Estado {{model?.installation?.estado}}; CEP {{model?.installation?.cep}}</p>
+    <div style="display: flex;">
+      <div style="width: fit-content;min-width: fit-content;margin-right: 15px;margin-bottom: 10px">
+        <p style="margin: 0;">CPF/CPNJ: {{model?.installation?.cpf_cnpj}}</p>
+        <p style="margin: 0;">Responsável: {{model?.installation?.responsavel}}</p>
+        <p style="margin: 0;">Técnico que irá atender a OS: {{tecnicosStr}}</p>
+      </div>
+      <div style="width: fit-content;min-width: fit-content;">
+        <p style="margin: 0;">Telefone: {{model?.installation?.telefone}}</p>
+        <p style="margin: 0;">Whatsapp: {{model?.installation?.whatsapp}}</p>
+        <p style="margin: 0;">Telefone Resp.: {{model?.installation?.telefone_responsavel}}</p>
+      </div>
+    </div>
+  </div>
+  <div style="border-bottom: solid 1px #4472C4;margin-bottom: 10px">
+    <p style="font-weight: bold;margin: 0;">Ativo: {{model?.asset?.codigo_identificador}} - {{model?.asset?.name}}</p>
+    <div style="display: flex;">
+      <div style="width: -webkit-fill-available">
+        <p style="margin: 0;">Marca: {{model?.asset?.marca}}</p>
+      </div>
+      <div style="width: -webkit-fill-available">
+        <p style="margin: 0;">Modelo: {{model?.asset?.modelo}}</p>
+      </div>
+      <div style="width: -webkit-fill-available">
+        <p style="margin: 0;">Condição do Ativo: {{model?.status_ativo}}</p>
+      </div>
+    </div>
+    <p style="margin: 0;margin-bottom: 10px">Componentes: {{componentsStr}}</p>
+  </div>
+  <div style="border-bottom: solid 1px #4472C4;margin-bottom: 10px">
+    <p style="margin: 0;"><span style="font-weight: bold;">Serviços a executar:</span> {{servicosExecutar}}</p>
+    <p style="margin: 0;" *ngIf="model?.tipo_defeito"><span style="font-weight: bold;">Tipo de Defeito:</span> {{model?.tipo_defeito}}</p>
+    <p style="margin: 0;" *ngIf="model?.causa"><span style="font-weight: bold;">Causa:</span> {{model?.causa}}</p>
+    <p style="margin: 0;" *ngIf="model?.solucao"><span style="font-weight: bold;">Solução:</span> {{model?.solucao}}</p>
+    <p style="margin: 0;margin-bottom: 10px"><span style="font-weight: bold;">Observações:</span> {{model?.observacao}}</p>
+  </div>
+  <div style="border-bottom: solid 1px #4472C4;margin-bottom: 10px" *ngIf="produtos?.length > 0">
+    <p style="font-weight: bold;margin: 0;">Produtos:</p>
+    <table style="margin-bottom: 10px;">
+      <tr>
+        <th style="text-align: left !important;">Código</th>
+        <th style="text-align: left !important;">Descrição do Item</th>
+        <th>Qtd</th>
+        <th style="text-align: right !important;" *ngIf="model?.mostrar_valor">Valor</th>
+        <th style="text-align: right !important;" *ngIf="model?.mostrar_valor">Valor Total</th>
+      </tr>
+      <tr *ngFor="let product of produtos">
+        <td style="text-align: left !important;">{{product?.product?.codigo}}</td>
+        <td style="text-align: left !important;">{{product?.product?.name}} {{product?.detalhe}}</td>
+        <td>{{product?.quantidade}}</td>
+        <td style="text-align: right !important;" *ngIf="model?.mostrar_valor">R$ {{numberToMoney(product?.product?.preco)}}</td>
+        <td style="text-align: right !important;" *ngIf="model?.mostrar_valor">R$ {{numberToMoney(product?.product?.preco * product?.quantidade)}}</td>
+      </tr>
+    </table>
+  </div>
+  <div style="display: flex;">
+    <div style="width: fit-content;margin-right: auto;">
+      <p style="margin: 0;">Responsável: {{model?.installation?.responsavel}}</p>
+      <p style="margin: 0;">Situação atual: {{model?.status?.name}}</p>
+      <p style="margin: 0;">Condição de Pagamento: {{model?.condicao_pagamento}}</p>
+    </div>
+    <div style="width: fit-content;min-width: fit-content;font-weight: bold;display: flex;" *ngIf="model?.mostrar_valor">
+      <div style="width: fit-content;min-width: fit-content;margin-right: 15px;">
+        <p style="margin: 0;">Valor Produtos:</p>
+        <p style="margin: 0;">Valor Serviço:</p>
+        <p style="margin: 0;" *ngIf="model?.deslocamento">Valor Deslocamento:</p>
+        <p style="margin: 0;">Valor Total:</p>
+      </div>
+      <div style="width: fit-content;min-width: fit-content;">
+        <p style="margin: 0;text-align: right;">R$ {{numberToMoney(total_produtos)}}</p>
+        <p style="margin: 0;text-align: right;">R$ {{numberToMoney(total_servicos)}}</p>
+        <p style="margin: 0;text-align: right;" *ngIf="model?.deslocamento">R$ {{numberToMoney(model?.deslocamento)}}</p>
+        <p style="margin: 0;text-align: right;">R$ {{numberToMoney(total_geral)}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row d-inline">
+  <div class="col-md-12">
+    <div class="text-right mt-3 mb-3">
+      <button class="btn btn-success"
+      [useExistingCss]="true"
+      [style.background]="configurations?.color_01"
+      printSectionId="print-section"
+      ngxPrint
+      >Imprimir</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="panel-header" [style.background]="configurations?.color_01">
+  <div class="page-inner py-5">
+    <div class="pb-2 d-flex align-items-left align-items-md-center flex-column flex-md-row">
+      <div>
+        <h2 class="text-white fw-bold m-auto">Dashboard</h2>
+      </div>
+      <!-- <div class="ml-md-auto">
+        <a class="btn btn-secondary btn-round">Filtros</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+<div class="page-inner mt--5">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Instalações</p>
+          <h2 class="">{{model?.count_installations}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Ativos</p>
+          <h2 class="">{{model?.counts?.qtd_ativos}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Ativos parados</p>
+          <h2 class="">{{model.counts?.ativos_parados?.length}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Percentual de Eficiência</p>
+          <h2 class="" *ngIf="model?.counts?.percentual_eficiencia">{{model?.counts?.percentual_eficiencia}}%</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Qtd OS's</p>
+          <h2 class="">{{model.counts?.qtd_oss}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Programadas</p>
+          <h2 class="">{{model.counts?.qtd_programadas}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Concluídas</p>
+          <h2 class="">{{model.counts?.qtd_concluidas}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Pendentes</p>
+          <h2 class="">{{model.counts?.qtd_pendentes}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body pb-0">
+          <p class="text-muted">Em Andamento</p>
+          <h2 class="">{{model.counts?.qtd_em_andamento}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card full-height">
+        <div class="card-body">
+          <div class="card-title">Manutenções</div>
+          <div class="row mt-2">
+            <div class="col">
+              <app-form-select
+              [label]="'Instalação'"
+              [list]="installations"
+              [key]="'uuid'"
+              [text]="'name'"
+              [(ngModel)]="model.installations_uuid"
+              name="installations_uuid"
+              (ngModelChange)="get()"
+              ></app-form-select>
+            </div>
+            <div class="col">
+              <app-form-select
+              [label]="'Tipo de OS'"
+              [list]="[
+                {id: 'Corretiva'},
+                {id: 'Preventiva'},
+                {id: 'Inspeção'},
+                {id: 'Preditiva'},
+                {id: 'Lubrificação'}
+              ]"
+              [key]="'id'"
+              [text]="'id'"
+              [(ngModel)]="model.maintenance_type"
+              name="maintenance_type"
+              (ngModelChange)="get()"
+              ></app-form-select>
+            </div>
+            <div class="col">
+              <app-form-date
+              [label]="'Data início'"
+              name="data_inicio"
+              [(ngModel)]="model.data_inicio"
+              (ngModelChange)="get()"
+              ></app-form-date>
+            </div>
+            <div class="col">
+              <app-form-date
+              [label]="'Data final'"
+              name="data_final"
+              [(ngModel)]="model.data_final"
+              (ngModelChange)="get()"
+              ></app-form-date>
+            </div>
+          </div>
+          <div class="row mt--2">
+            <div class="col">
+              <div class="px-2 pb-2 pb-md-0 text-center">
+                <app-chart-doughnut
+                *ngIf="tipoData"
+                [showlegend]="true"
+                [data]="tipoData"></app-chart-doughnut>
+                <h5 class="fw-bold mt-3 mb-0">Tipo</h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="px-2 pb-2 pb-md-0 text-center">
+                <app-chart-doughnut
+                *ngIf="defeitoData"
+                [showlegend]="true"
+                [data]="defeitoData"></app-chart-doughnut>
+                <h5 class="fw-bold mt-3 mb-0">Defeito</h5>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <div class="py-2 pb-md-0 text-center">
+                <app-table
+                #table
+                [dataSource]="dataSource"
+                [configuration]="configuration">
+                </app-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.kanban-item .kanban-badges{
+  white-space: break-spaces;
+}
+.kanban-item .kanban-badges .kanban-badge:not(:first-child){
+  margin-left: 0;
+}
+
+.kanban-title {
+  white-space: break-spaces;
+}

@@ -1,0 +1,6 @@
+<div class="my-image"
+(click)="!disabled ? fileSelect.click() : null"
+[ngStyle]="{'background-image': urlImage}">
+  <i *ngIf="!_file?.data" class="fa fa-camera fa-2x"></i>
+</div>
+<input type="file" id="file" style="display: none" (change)="handleFileInput($event)" #fileSelect>

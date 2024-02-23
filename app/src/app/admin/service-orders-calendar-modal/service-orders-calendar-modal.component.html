@@ -1,0 +1,85 @@
+<div class="row d-inline">
+  <div class="col-md-12">
+  <form #myForm="ngForm">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group form-group-default">
+            <label>OS</label>
+            <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="model.numero"
+            [required]="true"
+            [disabled]="true"
+            name="numero">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group form-group-default">
+            <label>Tipo</label>
+            <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="model.maintenance_type"
+            [required]="true"
+            [disabled]="true"
+            name="maintenance_type">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group form-group-default">
+            <label>Status</label>
+            <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="model.status.name"
+            [required]="true"
+            [disabled]="true"
+            name="statusname">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group form-group-default">
+            <label>Instalação</label>
+            <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="model.installation.name"
+            [required]="true"
+            [disabled]="true"
+            name="installationname">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group form-group-default">
+            <label>Ativo</label>
+            <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="model.asset.name"
+            [required]="true"
+            [disabled]="true"
+            name="assetname">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group form-group-default">
+            <label>Serviços</label>
+            <textarea class="form-control"
+            name="servicos"
+            rows="3"
+            [disabled]="true">{{servicesNames}}</textarea>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="text-right mt-3 mb-3">
+            <a href="/admin/service-orders/{{model?.uuid}}"
+            class="btn btn-success mr-2"
+            [style.background]="configurations?.color_01"
+            target="_blank">Abrir OS</a>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>
+</div>

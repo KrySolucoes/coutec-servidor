@@ -1,0 +1,243 @@
+
+<div class="page-inner">
+	<h4 class="page-title">Instalação</h4>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="card card-with-nav">
+				<div class="card-header">
+          <app-nav-tab [navMenu]="navMenu" (selectMenu)="selectMenu($event)"></app-nav-tab>
+				</div>
+				<div class="card-body">
+          <form #myForm="ngForm">
+            <div *ngIf="selectedMenu?.id == 1">
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="form-group form-group-default">
+                    <label>Nome / Razão Social</label>
+                    <input type="text" class="form-control" name="name" [(ngModel)]="model.name">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Nome Fantasia</label>
+                    <input type="text" class="form-control" name="nome_fantasia" [(ngModel)]="model.nome_fantasia">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="hello@example.com" [(ngModel)]="model.email">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Whatsapp</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    mask="(00) 00000-0000||(00) 0000-0000"
+                    [(ngModel)]="model.whatsapp"
+                    name="whatsapp">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Telefone</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    mask="(00) 00000-0000||(00) 0000-0000"
+                    [(ngModel)]="model.telefone"
+                    name="telefone">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <app-form-select
+                  [label]="'Relevancia'"
+                  [list]="relevances"
+                  [key]="'uuid'"
+                  [text]="'name'"
+                  [(ngModel)]="model.relevance_uuid"
+                  ></app-form-select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>CPF / CNPJ</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    mask="000.000.000-00||00.000.000/0000-00"
+                    [(ngModel)]="model.cpf_cnpj"
+                    name="cpf_cnpj">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Inscrição Municipal</label>
+                    <input type="text" class="form-control" name="inscricao_municipal" [(ngModel)]="model.inscricao_municipal">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Inscrição Estadual</label>
+                    <input type="text" class="form-control" name="inscricao_estadual" [(ngModel)]="model.inscricao_estadual">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 mb-1">
+                <div class="col-md-12">
+                  <div class="form-group form-group-default">
+                    <label>Observação</label>
+                    <textarea class="form-control" name="observacao" rows="3" [(ngModel)]="model.observacao">
+
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="selectedMenu?.id == 2">
+              <div class="row mt-3">
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>CEP</label>
+                    <input type="text" class="form-control" name="cep" [(ngModel)]="model.cep">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Estado</label>
+                    <input type="text" class="form-control" name="estado" [(ngModel)]="model.estado">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Cidade</label>
+                    <input type="text" class="form-control" name="cidade" [(ngModel)]="model.cidade">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-9">
+                  <div class="form-group form-group-default">
+                    <label>Logradouro</label>
+                    <input type="text" class="form-control" name="logradouro" [(ngModel)]="model.logradouro">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group form-group-default">
+                    <label>Número</label>
+                    <input type="text" class="form-control" name="numero" [(ngModel)]="model.numero">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Bairro</label>
+                    <input type="text" class="form-control" name="bairro" [(ngModel)]="model.bairro">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-group-default">
+                    <label>Complemento</label>
+                    <input type="text" class="form-control" name="complemento" [(ngModel)]="model.complemento">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="selectedMenu?.id == 3">
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="form-group form-group-default">
+                    <label>Responsável</label>
+                    <input type="text" class="form-control" name="responsavel" [(ngModel)]="model.responsavel">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-8">
+                  <div class="form-group form-group-default">
+                    <label>Cargo</label>
+                    <input type="text" class="form-control" name="cargo_responsavel" [(ngModel)]="model.cargo_responsavel">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group form-group-default">
+                    <label>Telefone do Responsável</label>
+                    <input type="text" class="form-control" name="telefone_responsavel" [(ngModel)]="model.telefone_responsavel">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="form-group form-group-default">
+                    <label>Email do Responsável</label>
+                    <input type="email" class="form-control" name="email_responsavel" placeholder="hello@example.com" [(ngModel)]="model.email_responsavel">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="selectedMenu?.id == 4">
+              <div *ngIf="serviceOrders">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nome</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let so of serviceOrders" class="nav-item">
+                      <td>
+                        <a [routerLink]="['/admin/service-orders/' + so.uuid]">
+                          #{{so.numero}} {{so.maintenance_type}} | {{so.status.name}}
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+					<div class="text-right mt-3 mb-3">
+            <button class="btn btn-danger mr-2" (click)="delete()">Excluir</button>
+						<button class="btn btn-success" [style.background]="configurations?.color_01" (click)="save()">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card card-profile">
+				<div class="card-header" [style.background]="configurations?.color_01">
+					<div class="profile-picture">
+						<div class="avatar avatar-xl">
+              <app-image-view
+              [(ngModel)]="model.image_uuid"
+              ></app-image-view>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="user-profile text-center">
+						<div class="name">{{model?.name}}</div>
+						<div class="job">{{model?.telefone}}</div>
+						<div class="desc">{{model?.email}}</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="row user-stats text-center">
+						<div class="col">
+							<div class="number">{{serviceOrders.length}}</div>
+							<div class="title">OS's</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+[default]
+EXTENSIONS=[
+    "app.extensions.functions",
+    "app.extensions.log",
+    "app.extensions.database",
+    "app.extensions.email",
+    "app.extensions.token",
+    "app.extensions.user",
+    "app.extensions.generic_object",
+    "app.extensions.cache",
+
+
+    "app.extensions.installations.installations",
+    "app.extensions.installations.relevances",
+
+    "app.extensions.assets.asset_types",
+    "app.extensions.assets.custom_attributes_types",
+    "app.extensions.assets.custom_attributes",
+    "app.extensions.assets.assets",
+    
+    "app.extensions.persons.persons",
+    "app.extensions.persons.profiles",
+
+    "app.extensions.products.products",
+    "app.extensions.products.stocks",
+
+    "app.extensions.providers.providers",
+
+    "app.extensions.service_orders.service_orders",
+    "app.extensions.service_orders.service_orders_status",
+    "app.extensions.service_orders.service_orders_products",
+    "app.extensions.service_orders.service_orders_evidences",
+    "app.extensions.service_orders.service_orders_comments",
+    "app.extensions.service_orders.maintenance_plan",
+
+    "app.extensions.configurations_app.configurations_app",
+
+    "app.extensions.uploads.uploads",
+
+    "app.extensions.dashboards.dashboards",
+    
+    "app.extensions.routes",
+    "app.extensions.metrics",
+]

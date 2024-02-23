@@ -1,0 +1,31 @@
+<div class="form-group form-group-default">
+  <label *ngIf="label">{{label}}</label>
+  <label *ngIf="placeholder" class="placeholder" [ngClass]="{'no-value': !value}">{{placeholder}}</label>
+  <mat-form-field *ngIf="!multiple">
+    <mat-select [(ngModel)]="value" [required]="required" [disabled]="disabled">
+      <mat-option>
+        <ngx-mat-select-search [(ngModel)]="filter"
+        placeholderLabel="Digite para procurar..."
+        noEntriesFoundLabel="Nenhum resultado encontrado."></ngx-mat-select-search>
+      </mat-option>
+      <mat-option [value]="null" *ngIf="!required">
+        -
+      </mat-option>
+      <mat-option *ngFor="let item of listFilter" [value]="item[key]">
+        {{item[text]}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="multiple">
+    <mat-select [(ngModel)]="value" [required]="required" [disabled]="disabled" multiple>
+      <mat-option>
+        <ngx-mat-select-search [(ngModel)]="filter"
+        placeholderLabel="Digite para procurar..."
+        noEntriesFoundLabel="Nenhum resultado encontrado."></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let item of listFilter" [value]="item[key]">
+        {{item[text]}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

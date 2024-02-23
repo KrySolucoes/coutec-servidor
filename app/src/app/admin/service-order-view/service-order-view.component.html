@@ -1,0 +1,112 @@
+
+				<div class="page-inner">
+					<div class="row justify-content-center">
+						<div class="col-12 col-lg-10 col-xl-9">
+							<div class="row align-items-center">
+								<div class="col">
+									<h4 class="page-title">Ordem de Serviço - #{{model.numero}}</h4>
+								</div>
+								<div class="col-auto">
+									<button
+                  [useExistingCss]="true"
+                  styleSheetFile="http://200.98.136.41:443/assets/css/bootstrap4.4.min.css,http://200.98.136.41:443/assets/css/atlantis.css,http://200.98.136.41:443/assets/css/demo.css"
+                  class="btn btn-light btn-border"
+                  printSectionId="print-section"
+                  ngxPrint>
+										Imprimir
+									</button>
+								</div>
+							</div>
+							<div class="page-divider"></div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="card card-invoice" id="print-section">
+										<div class="card-header">
+											<div class="invoice-header">
+												<h3 class="invoice-title">
+													Ordem de Serviço - #{{model.numero}}
+												</h3>
+												<div class="invoice-logo">
+													<img src="{{configurations?.image?.data}}" class="navbar-brand">
+												</div>
+											</div>
+										</div>
+										<div class="card-body">
+											<div class="separator-solid"></div>
+											<div class="row">
+												<div class="col-md-4 info-invoice">
+													<h5 class="sub">Data</h5>
+													<p>04 de janeiro de 2022</p>
+												</div>
+												<div class="col-md-4 info-invoice">
+													<h5 class="sub">Ordem de Serviço</h5>
+													<p>#{{model.numero}}</p>
+												</div>
+												<div class="col-md-4 info-invoice">
+													<h5 class="sub">Instalação</h5>
+													<p>
+														{{model?.installation?.name}}
+													</p>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="invoice-detail">
+														<div class="invoice-top">
+															<h3 class="title"><strong>Produtos/Serviços</strong></h3>
+														</div>
+														<div class="invoice-item">
+															<div class="table-responsive">
+																<table class="table table-striped">
+																	<thead>
+																		<tr>
+																			<td><strong>Item</strong></td>
+																			<td class="text-center"><strong>Preço</strong></td>
+																			<td class="text-center"><strong>Quantidade</strong></td>
+																			<td class="text-right"><strong>Total</strong></td>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr *ngFor="let product of model.products">
+																			<td>{{product.product_name}}</td>
+																			<td class="text-center">R${{product.preco}}</td>
+																			<td class="text-center">1</td>
+																			<td class="text-right">R${{product.preco * product.quantidade}}</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="separator-solid  mb-3"></div>
+												</div>
+											</div>
+										</div>
+										<div class="card-footer">
+											<div class="row">
+												<div class="col-sm-7 col-md-5 mb-3 mb-md-0 transfer-to">
+													<h5 class="sub">Ordem Finalizada</h5>
+													<div class="account-transfer">
+														<div><span>Abertura:</span><span>{{model.data_inicio}}</span></div>
+														<div><span>Finalização:</span><span>{{model.data_finalizacao}}</span></div>
+													</div>
+												</div>
+												<div class="col-sm-5 col-md-7 transfer-total">
+													<h5 class="sub">Total da Ordem de Serviço</h5>
+													<div class="price">R${{total}}</div>
+												</div>
+											</div>
+											<div class="separator-solid"></div>
+											<h6 class="text-uppercase mt-4 mb-3 fw-bold">
+												Observação
+											</h6>
+											<p class="text-muted mb-0">
+												{{model.observacao}}
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>

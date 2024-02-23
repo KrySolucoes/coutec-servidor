@@ -1,0 +1,91 @@
+
+<div>
+  <div style="overflow: auto;" class="table-component" [ngClass]="{'display-none': exporting}">
+          <table mat-table [dataSource]="dataSource" id="{{this.tableId}}" matSort [ngClass]="{'hideFooter': showFooter == false}">
+              <ng-container *ngFor="let column of configuration?.columns" matColumnDef="{{column.data}}">
+                  <th mat-header-cell *matHeaderCellDef
+                  (mouseover)="hoverTable(column)"
+                  (mouseout)="hoverTable(null)"
+                  [ngClass]="{'hover-column': column == hoverColumn}">
+                      <div class="group-column-filter">
+                        <div mat-sort-header id="sort{{column?.data}}"></div>
+                        <div class="div-table-title d-flex justify-content-center align-items-center"
+                        [ngClass]="{'filter': inFilter(column)}"
+                        (click)="setSort(column)">
+                            <div class="flex-grow-1 table-title"
+                            style="cursor: pointer;"
+                            [innerHtml]="column.title">
+                            </div>
+                            <input
+                            *ngIf="inFilter(column)"
+                            type="text"
+                            class="form-control"
+                            name="filterText"
+                            [(ngModel)]="filterText[column.data]"
+                            (ngModelChange)="applyFilter()">
+                        </div>
+                        <button class="btn btn-filter"
+                        *ngIf="!(column?.enableFilter === false)"
+                        (click)="setFilter(column)">
+                          <i class="fas fa-filter"></i>
+                        </button>
+                      </div>
+                      <div class="resizer" *ngIf="allowColumnResize" (mousedown)="OnResizerMouseDown($event, column)"></div>
+                  </th>
+                  <td mat-cell *matCellDef="let element"
+                  (mouseover)="hoverTable(column)"
+                  (mouseout)="hoverTable(null)"
+                  (click)="clickCell(element, column)"
+                  [ngClass]="{'hover-column': column == hoverColumn}">
+                      <div class="table-column {{getJustify(column?.justify)}}">
+                          <ng-container *ngIf="showColumn(column, 'text')">
+                              {{prepareText(element, column)}}
+                          </ng-container>
+                          <ng-container *ngIf="showColumn(column, 'currency')">
+                              {{toMoney(prepareText(element, column))}}
+                          </ng-container>
+                          <ng-container *ngIf="showColumn(column, 'buttons')">
+                              <button
+                              *ngFor="let button of column?.buttons"
+                              class="btn"
+                              mat-icon-button
+                              color="primary"
+                              aria-label="Example icon button with a home icon"
+                              [disabled]="button?.disabledByField ? !element[button?.disabledByField] : false"
+                              (click)="clickButton(button, element)">
+                                  <i class="fas" [ngClass]="button?.icon" *ngIf="button?.icon"></i>
+                              </button>
+                          </ng-container>
+                          <div class="separator" *ngIf="allowColumnResize"></div>
+                      </div>
+                  </td>
+                  <td mat-footer-cell *matFooterCellDef
+                  [ngClass]="{'display-none': getColspan(column) == 0, 'hover-column': column == hoverColumn}"
+                  [attr.colspan]="getColspan(column)"
+                  (mouseover)="hoverTable(column)"
+                  (mouseout)="hoverTable(null)">
+                      <div class="table-column {{getJustify(column?.footer?.justify)}}">
+                          <ng-container *ngIf="column?.footer">
+                              {{prepareFooter(column)}}
+                          </ng-container>
+                          <div class="separator" *ngIf="allowColumnResize"></div>
+                      </div>
+                  </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          </table>
+      <div class="not-found" *ngIf="!dataSource?.data?.length || dataSource?.data?.length == 0">
+          Nenhum registro encontrado.
+      </div>
+  </div>
+  <div class="table-container-footer">
+    <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"
+        [ngClass]="{'display-none': !dataSource?.data?.length || dataSource?.data?.length == 0}"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+    </mat-paginator>
+    <button class="btn" (click)="Export()"><i class="fas fa-file-download"></i></button>
+  </div>
+</div>
