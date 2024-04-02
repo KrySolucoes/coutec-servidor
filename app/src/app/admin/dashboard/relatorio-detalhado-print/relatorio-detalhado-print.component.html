@@ -103,19 +103,31 @@
       <div *ngFor="let cronograma of model?.cronograma?.cronograma_grupos" style="padding-top: 10px;">
         <p style="font-weight: bold;margin: 0;">{{cronograma?.mes_ano}}</p>
         <p style="font-weight: bold;margin: 0;">Manutenção dos ativos:</p>
-        <table class="val-top">
-          <ng-container *ngFor="let asset of cronograma?.manutencoes">
-            <tr>
-              <td style="border-right: solid 1px; text-align: left !important;">{{asset?.data_inicio}} {{asset?.data_os}}</td>
-              <td style="border-right: solid 1px; text-align: left !important;">Duração: {{asset?.duracao}}</td>
-              <td style="border-right: solid 1px; text-align: left !important;">{{asset?.ativo}}</td>
-              <td style="border-right: solid 1px; text-align: left !important;">OS {{asset?.numero}}</td>
-              <td style="border-right: solid 1px; text-align: left !important;">{{asset?.tipo}}</td>
-              <td style="text-align: left !important;">Técnicos {{asset?.tecnico}}</td>
-              <td style="text-align: left !important;">{{asset?.servico}}</td>
-              <td style="text-align: left !important;">{{asset?.produto}}</td>
-            </tr>
-          </ng-container>
+        <table class="table">
+          <thead>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let asset of cronograma?.manutencoes">
+              <tr>
+                <td style="border-right: solid 1px; text-align: left !important; width: 116.8px;">{{asset?.data_inicio}} {{asset?.data_os}}</td>
+                <td style="border-right: solid 1px; text-align: left !important; width: 72px;">Duração: {{asset?.duracao}}</td>
+                <td style="border-right: solid 1px; text-align: left !important; width: 82px;">{{asset?.ativo}}</td>
+                <td style="border-right: solid 1px; text-align: left !important; width: 50px;">OS {{asset?.numero}}</td>
+                <td style="border-right: solid 1px; text-align: left !important; width: 50px;">{{asset?.tipo}}</td>
+                <td style="text-align: left !important;">Técnicos {{asset?.tecnico}}</td>
+                <td style="text-align: left !important;">{{asset?.servico}}</td>
+                <td style="text-align: left !important;">{{asset?.produto}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
         </table>
       </div>
   </div>
