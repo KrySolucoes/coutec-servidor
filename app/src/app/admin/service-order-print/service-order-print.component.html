@@ -56,7 +56,21 @@
     <p style="margin: 0;margin-bottom: 10px">Componentes: {{componentsStr}}</p>
   </div>
   <div style="border-bottom: solid 1px #4472C4;margin-bottom: 10px">
-    <p style="margin: 0;"><span style="font-weight: bold;">Serviços a executar:</span> {{servicosExecutar}}</p>
+    <table class="table">
+      <thead style="background-color: #D4D5CE;">
+        <tr>
+          <th scope="col">Serviço</th>
+          <th scope="col">Tempo de execução</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of servicos">
+          <td>{{x.product?.name}}</td>
+          <td>{{x.product?.tempo_medio_execucao}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <p style="margin: 0;"><span style="font-weight: bold;">Serviços a executar:</span> {{servicosExecutar}}</p> -->
     <p style="margin: 0;" *ngIf="model?.tipo_defeito"><span style="font-weight: bold;">Tipo de Defeito:</span> {{model?.tipo_defeito}}</p>
     <p style="margin: 0;" *ngIf="model?.causa"><span style="font-weight: bold;">Causa:</span> {{model?.causa}}</p>
     <p style="margin: 0;" *ngIf="model?.solucao"><span style="font-weight: bold;">Solução:</span> {{model?.solucao}}</p>
@@ -64,21 +78,25 @@
   </div>
   <div style="border-bottom: solid 1px #4472C4;margin-bottom: 10px" *ngIf="produtos?.length > 0">
     <p style="font-weight: bold;margin: 0;">Produtos:</p>
-    <table style="margin-bottom: 10px;">
-      <tr>
-        <th style="text-align: left !important;">Código</th>
-        <th style="text-align: left !important;">Descrição do Item</th>
-        <th>Qtd</th>
-        <th style="text-align: right !important;" *ngIf="model?.mostrar_valor">Valor</th>
-        <th style="text-align: right !important;" *ngIf="model?.mostrar_valor">Valor Total</th>
-      </tr>
-      <tr *ngFor="let product of produtos">
-        <td style="text-align: left !important;">{{product?.product?.codigo}}</td>
-        <td style="text-align: left !important;">{{product?.product?.name}} {{product?.detalhe}}</td>
-        <td>{{product?.quantidade}}</td>
-        <td style="text-align: right !important;" *ngIf="model?.mostrar_valor">R$ {{numberToMoney(product?.product?.preco)}}</td>
-        <td style="text-align: right !important;" *ngIf="model?.mostrar_valor">R$ {{numberToMoney(product?.product?.preco * product?.quantidade)}}</td>
-      </tr>
+    <table class="table" style="margin-bottom: 10px;">
+      <thead style="background-color: #D4D5CE;">
+        <tr>
+          <th style="text-align: left !important;">Código</th>
+          <th style="text-align: left !important;">Descrição do Item</th>
+          <th>Qtd</th>
+          <th style="text-align: right !important;" *ngIf="model?.mostrar_valor">Valor</th>
+          <th style="text-align: right !important;" *ngIf="model?.mostrar_valor">Valor Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of produtos">
+          <td style="text-align: left !important;">{{product?.product?.codigo}}</td>
+          <td style="text-align: left !important;">{{product?.product?.name}} {{product?.detalhe}}</td>
+          <td>{{product?.quantidade}}</td>
+          <td style="text-align: right !important;" *ngIf="model?.mostrar_valor">R$ {{numberToMoney(product?.product?.preco)}}</td>
+          <td style="text-align: right !important;" *ngIf="model?.mostrar_valor">R$ {{numberToMoney(product?.product?.preco * product?.quantidade)}}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <div style="display: flex;">
