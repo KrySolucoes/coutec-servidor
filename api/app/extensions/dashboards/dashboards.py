@@ -148,6 +148,7 @@ class Dashboards(GenericObject):
 				periodicidade,
 				p.name,
 				num_os ) t3
+                where data_os is not null
                 group by instalacao_uuid,
                 instalacao,
                 data_os,
