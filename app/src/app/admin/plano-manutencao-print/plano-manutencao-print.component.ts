@@ -53,11 +53,11 @@ export class PlanoManutencaoPrintComponent implements OnInit {
     const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
     if(printContent?.innerHTML)
       WindowPrt?.document.write(printContent?.innerHTML);
-    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.41:443/assets/css/bootstrap4.4.min.css">');
-    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.41:443/assets/css/atlantis.css">');
-    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.41:443/assets/css/demo.css">');
-    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.41:443/assets/css/printlandscape.css">');
-    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.41:443/styles.css">');
+    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.47/assets/css/bootstrap4.4.min.css">');
+    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.47/assets/css/atlantis.css">');
+    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.47/assets/css/demo.css">');
+    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.47/assets/css/printlandscape.css">');
+    WindowPrt?.document.write('<link rel="stylesheet" type="text/css" href="http://200.98.136.47/styles.css">');
     WindowPrt?.document.close();
     WindowPrt?.focus();
     WindowPrt?.addEventListener('load', function() {
