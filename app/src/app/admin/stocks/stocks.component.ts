@@ -64,18 +64,6 @@ export class StocksComponent implements OnInit {
       {
         data: 'fornecedor',
         title: 'Fornecedor'
-      },
-      {
-        data: 'estoque_atual',
-        title: 'Estoque atual'
-      },
-      {
-        data: 'estoque_baixo_str',
-        title: 'Estoque abaixo do consumo'
-      },
-      {
-        data: 'estoque_minimo',
-        title: 'Estoque mínimo'
       }
     ]
   }

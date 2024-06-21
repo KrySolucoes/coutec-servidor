@@ -11,12 +11,13 @@ export class ServiceOrderWPrintComponent implements OnInit {
   model: any = {}
   data: any[] = []
   installations: any[] = []
-  anos: any[] = [
-    {id: 2020, name: '2020'},
-    {id: 2021, name: '2021'},
-    {id: 2022, name: '2022'},
-    {id: 2023, name: '2023'},
-  ]
+  // anos: any[] = [
+  //   {id: 2020, name: '2020'},
+  //   {id: 2021, name: '2021'},
+  //   {id: 2022, name: '2022'},
+  //   {id: 2023, name: '2023'},
+  // ]
+  anos: any[] = []
 
   constructor(
     private service: DashboardsService
@@ -40,6 +41,11 @@ export class ServiceOrderWPrintComponent implements OnInit {
       }
     )
     this.get()
+    // de 2020 até o ano atual + 2
+    let ano = new Date().getFullYear()
+    for (let i = 2020; i <= ano + 2; i++){
+      this.anos.push({id: i, name: i})
+    }
   }
 
   get user(){

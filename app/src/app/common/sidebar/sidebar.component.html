@@ -55,7 +55,7 @@
           <li *ngIf="user?.roles?.includes('administrador') || user?.roles?.includes('operador')" class="nav-item" routerLinkActive="active">
             <a routerLink="/admin/stock" [style.background]="backgroundColor('/admin/stock')">
               <i class="fas fa-cubes"></i>
-              <p>Estoque</p>
+              <p>Compras Realizadas</p>
               <span class="badge badge-count">{{getCount('stocks')}}</span>
             </a>
           </li>
