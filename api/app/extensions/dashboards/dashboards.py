@@ -59,8 +59,8 @@ class Dashboards(GenericObject):
                 servico,
                 produto,
                 data_inicio,
-				data_os,
-				STRING_AGG(tecnico, ', ') as tecnico,
+                data_os,
+                STRING_AGG(distinct tecnico, ', ') as tecnico,
                 duracao
                 from (
                 select
@@ -75,11 +75,11 @@ class Dashboards(GenericObject):
                 tipo,
                 numero,
                 periodicidade,
-                STRING_AGG(servico, ', ') as servico,
-                STRING_AGG(produto, ', ') as produto,
+                STRING_AGG(distinct servico, ', ') as servico,
+                STRING_AGG(distinct produto, ', ') as produto,
                 p.name as tecnico,
                 data_inicio,
-				data_os,
+                data_os,
                 sum(case when tipo = 'Corretiva' then DATE_PART('minute', data_os - data_inicio) else DATE_PART('minute',duracao) end) as duracao
                 from (
                 select distinct i.uuid as instalacao_uuid, i.name as instalacao, so.uuid as idos,
@@ -99,10 +99,10 @@ class Dashboards(GenericObject):
                 so.maintenance_frequency as periodicidade,
                 p2."name" as servico,
                 p2.tempo_medio_execucao as duracao,
-				p3."name" as produto,
-				case when so.data_inicio is null then so.data_prevista_inicio  else so.data_inicio end as data_inicio,
-				so.data_conclusao,
-				so.numero as num_os
+                p3."name" as produto,
+                case when so.data_inicio is null then so.data_prevista_inicio  else so.data_inicio end as data_inicio,
+                so.data_conclusao,
+                so.numero as num_os
                 from service_orders so
                     inner join service_orders_status ss
                         on so.status_uuid = ss.uuid
@@ -120,7 +120,7 @@ class Dashboards(GenericObject):
                         on p2.uuid  = sop2.product_uuid and p2."type" = 'Serviço'
                     left join service_orders_products sop3
                         on so.uuid = sop3.service_orders_uuid
-					left join products p3
+                    left join products p3
                         on p3.uuid  = sop3.product_uuid and p3."type" = 'Produto'
                 where so.data_prevista_inicio is not null
                 and data_prevista_inicio between '""" + data_inicio + """' and '""" + data_final + """'
@@ -130,10 +130,10 @@ class Dashboards(GenericObject):
                 + ("" if not_maintenance_type is None else """ and so.maintenance_type not in (""" + not_maintenance_type + """)""")
                 + """
                 order by 1, 2, 4, 9, 11) t2
-                   left join service_orders_persons sop  
-                    	on sop.service_orders_uuid  = t2.idos 
+                left join service_orders_persons sop  
+                        on sop.service_orders_uuid  = t2.idos 
                     left join persons p 
-                    	on sop.person_uuid = p.uuid 
+                        on sop.person_uuid = p.uuid 
                 group by instalacao_uuid,
                 instalacao,
                 data_os,
@@ -145,10 +145,9 @@ class Dashboards(GenericObject):
                 tipo,
                 numero,
                 data_inicio,
-				periodicidade,
-				p.name,
-				num_os ) t3
-                where data_os is not null
+                periodicidade,
+                p.name,
+                num_os ) t3
                 group by instalacao_uuid,
                 instalacao,
                 data_os,
@@ -164,7 +163,7 @@ class Dashboards(GenericObject):
                 servico,
                 produto,
                 data_inicio,
-				data_os,
+                data_os,
                 duracao""",
             )
             cronograma_grupos = []
