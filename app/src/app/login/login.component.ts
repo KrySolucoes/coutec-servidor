@@ -65,7 +65,16 @@ export class LoginComponent implements OnInit {
           if (this.redirect){
             window.location.href = decodeURIComponent(this.redirect)
           } else {
-            window.location.href = window.location.href.replace('/login', '/admin');
+            if (window.location.href.includes('localhost')) {
+              window.location.href = window.location.href.replace('/login', '/admin');
+            } else {
+              let _url = window.location.href.replace('/login', '/admin').replace('/login', '/admin');
+              if (_url.includes('/admin/admin')) {
+                window.location.href = _url;
+              } else {
+                window.location.href = window.location.href.replace('/login', '/admin/admin');
+              }
+            }
           }
         } else {
           alert('Erro ao fazer login')
