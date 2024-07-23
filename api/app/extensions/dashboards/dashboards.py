@@ -168,23 +168,24 @@ class Dashboards(GenericObject):
             )
             cronograma_grupos = []
             for i in detalhamento:
-                i['dia_semana'] = self.app.Functions.dia_semana(i['data_os'])
-                i['grupo'] = i['data_os'].strftime('%Y-%m')
-                i['mes_ano'] = self.app.Functions.mes(i['data_os']) + i['data_os'].strftime('/%Y')
-                i['order'] = i['data_os'].strftime('%Y%m%d%H%M%S')
-                i['data_os'] = self.app.Functions.date_to_datebr(i['data_os'])
-                i['data_inicio'] = self.app.Functions.date_to_datebr(i['data_inicio'])
-                # i['duracao'] = str(i['duracao'])[0:5]
-                # if i['duracao'][-1:] == ':':
-                #     i['duracao'] = '0' + i['duracao'][:-1]
-                i['duracao'] = '' if i['duracao'] is None else str(i['duracao']).split('.')[0]
-                if len([x for x in cronograma_grupos if x['grupo'] == i['grupo']]) == 0:
-                    cronograma_grupos.append({'grupo': i['grupo'], 'mes_ano': i['mes_ano'], 'manutencoes': []})
-                    cronograma_grupos = sorted(cronograma_grupos, key=lambda k: k['grupo'])
-                for j in cronograma_grupos:
-                    if j['grupo'] == i['grupo']:
-                        j['manutencoes'].append(i)
-                        j['manutencoes'] = sorted(j['manutencoes'], key=lambda k: k['order'])
+                if i['data_os']:
+                    i['dia_semana'] = self.app.Functions.dia_semana(i['data_os'])
+                    i['grupo'] = i['data_os'].strftime('%Y-%m')
+                    i['mes_ano'] = self.app.Functions.mes(i['data_os']) + i['data_os'].strftime('/%Y')
+                    i['order'] = i['data_os'].strftime('%Y%m%d%H%M%S')
+                    i['data_os'] = self.app.Functions.date_to_datebr(i['data_os'])
+                    i['data_inicio'] = self.app.Functions.date_to_datebr(i['data_inicio'])
+                    # i['duracao'] = str(i['duracao'])[0:5]
+                    # if i['duracao'][-1:] == ':':
+                    #     i['duracao'] = '0' + i['duracao'][:-1]
+                    i['duracao'] = '' if i['duracao'] is None else str(i['duracao']).split('.')[0]
+                    if len([x for x in cronograma_grupos if x['grupo'] == i['grupo']]) == 0:
+                        cronograma_grupos.append({'grupo': i['grupo'], 'mes_ano': i['mes_ano'], 'manutencoes': []})
+                        cronograma_grupos = sorted(cronograma_grupos, key=lambda k: k['grupo'])
+                    for j in cronograma_grupos:
+                        if j['grupo'] == i['grupo']:
+                            j['manutencoes'].append(i)
+                            j['manutencoes'] = sorted(j['manutencoes'], key=lambda k: k['order'])
             _return = {
                 'success': True,
                 self.name: {
